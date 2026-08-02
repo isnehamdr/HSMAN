@@ -145,7 +145,7 @@ export default function Footer() {
         {/* Giant watermark text - kept as is but you can increase if needed */}
         <div className="overflow-hidden mt-4 select-none pointer-events-none">
           <h1
-            className="text-center font-extrabold leading-none text-[18vw] sm:text-[14vw] lg:text-[14vw] whitespace-nowrap"
+            className="text-center font-extrabold leading-none text-[24vw] sm:text-[14vw] lg:text-[25vw] whitespace-nowrap"
             style={{
               background: "linear-gradient(180deg, #007DCC 0%, rgba(0,125,204,0) 100%)",
               WebkitBackgroundClip: "text",
@@ -153,7 +153,7 @@ export default function Footer() {
               color: "transparent",
             }}
           >
-            HSMAN 2078
+            HSMAN 
           </h1>
         </div>
 

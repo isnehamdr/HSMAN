@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-const SLIDE_DURATION = 6000; // ms each image stays on screen (zoom completes within this time)
+const SLIDE_DURATION = 6000; // ms each image stays on screen
 
 const heroImages = [
   "/images/hero-bg.jpeg",
@@ -10,53 +10,40 @@ const heroImages = [
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % heroImages.length);
+      setTick((t) => t + 1);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="relative w-full h-[85vh] sm:h-[90vh] min-h-[560px] font-sans overflow-hidden">
-      {/* Slideshow: each image zooms in over SLIDE_DURATION, then crossfades to the next */}
-      {heroImages.map((src, index) => (
-        <div
-          key={src}
-          className={`absolute inset-0 bg-center bg-cover transition-opacity duration-[1200ms] ease-in-out ${
-            index === activeIndex ? "opacity-100 animate-hero-zoom" : "opacity-0"
-          }`}
-          style={{
-            backgroundImage: `url('${src}')`,
-            animationDuration: `${SLIDE_DURATION}ms`,
-            animationPlayState: index === activeIndex ? "running" : "paused",
-          }}
-        />
-      ))}
-
-      {/* Keyframes for the per-slide zoom motion */}
-      <style>{`
-        @keyframes heroZoom {
-          0% {
-            transform: scale(1);
-          }
-          100% {
-            transform: scale(1.18);
-          }
-        }
-        .animate-hero-zoom {
-          animation-name: heroZoom;
-          animation-timing-function: ease-out;
-          animation-fill-mode: forwards;
-          will-change: transform;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-hero-zoom {
-            animation: none;
-          }
-        }
-      `}</style>
+    <section className="relative w-full h-screen font-sans overflow-hidden">
+      {/* Slideshow: each image zooms in, then crossfades to the next */}
+      {heroImages.map((src, index) => {
+        const isActive = index === activeIndex;
+        return (
+          <div
+            key={src}
+            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${
+              isActive ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <div
+              className="absolute inset-0 bg-center bg-cover"
+              style={{
+                backgroundImage: `url('${src}')`,
+                transform: isActive ? "scale(1.18)" : "scale(1)",
+                transition: `transform ${SLIDE_DURATION}ms ease-out`,
+                transformOrigin: "center",
+              }}
+            />
+          </div>
+        );
+      })}
 
       {/* Overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/20" />
@@ -84,7 +71,7 @@ export default function Hero() {
             </p>
             <a
               href="#membership"
-              className="inline-flex items-center justify-center gap-2 bg-[#007DCC] text-white hover:bg-gray-100 transition-colors  font-semibold px-6 py-3 rounded-md text-sm sm:text-base w-fit"
+              className="inline-flex items-center justify-center gap-2 bg-[#007DCC] text-white hover:bg-[#006bb3] transition-colors font-semibold px-6 py-3 rounded-md text-sm sm:text-base w-fit"
             >
               Become a member
             </a>

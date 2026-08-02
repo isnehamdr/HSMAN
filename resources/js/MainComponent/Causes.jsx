@@ -8,9 +8,7 @@ const programs = [
     title: "HSMAN Sales Meet",
     description:
       "Bringing hospitality sales professionals together to connect, share strategies, and build lasting industry relationships.",
-    raised: 0,
-    goal: 60,
-    days: 120,
+   
   },
   {
     image:
@@ -19,9 +17,7 @@ const programs = [
     title: "Blood Donation Program",
     description:
       "Giving back to the community through organized blood donation drives in partnership with the Nepal Red Cross.",
-    raised: 0,
-    goal: 70,
-    days: 150,
+  
   },
   {
     image:
@@ -30,9 +26,7 @@ const programs = [
     title: "Meet & Greet Program",
     description:
       "Capacity-building sessions on digital marketing, branding, and customer service for hospitality professionals.",
-    raised: 0,
-    goal: 55,
-    days: 90,
+   
   },
 ];
 
@@ -102,7 +96,7 @@ export default function Programs() {
                 </p>
 
                 {/* Progress */}
-                <div className="mt-5">
+                {/* <div className="mt-5">
                   <div className="flex items-center justify-between text-sm text-gray-700 mb-2">
                     <span>{program.raised}%</span>
                     <span>{program.goal}%</span>
@@ -113,14 +107,14 @@ export default function Programs() {
                       style={{ width: `${program.goal}%` }}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 {/* Footer row */}
                 <div className="flex items-center justify-between mt-5">
-                  <span className="flex items-center gap-2 text-gray-700 text-sm font-medium">
+                  {/* <span className="flex items-center gap-2 text-gray-700 text-sm font-medium">
                     <Clock size={16} className="text-[#007DCC]" />
                     {program.days} Days
-                  </span>
+                  </span> */}
                   <a
                     href="#contact"
                     className="inline-flex items-center gap-2 bg-[#007DCC] hover:bg-[#0066a8] transition-colors text-white font-semibold pl-1.5 pr-4 py-2 rounded-full text-sm"

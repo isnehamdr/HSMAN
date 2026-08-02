@@ -1,61 +1,314 @@
+// import { useState, useEffect } from "react";
+// import { Phone, Mail, Menu, X } from "lucide-react";
+
+// export default function Navbar() {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
+
+//   const navLinks = [
+//     { label: "Home", href: "#home", active: true },
+//     { label: "About Us", href: "#about" },
+//     { label: "Member", href: "#member" },
+//     { label: "Agencies", href: "#agencies" },
+//     { label: "Gallery", href: "#gallery" },
+//     { label: "Our Team", href: "#team" },
+//     { label: "FAQ", href: "#faq" },
+//     { label: "News & Events", href: "#contact" },
+//   ];
+
+//   // Lock background scroll when hamburger menu is open
+//   useEffect(() => {
+//     document.body.style.overflow = menuOpen ? "hidden" : "";
+//     return () => {
+//       document.body.style.overflow = "";
+//     };
+//   }, [menuOpen]);
+
+//   // Track scroll direction: show bg when scrolling up (and not at top), hide when scrolling down
+//   // Navbar itself stays fixed/visible at all times - only background/color changes
+//   useEffect(() => {
+//     let lastY = window.scrollY;
+
+//     const handleScroll = () => {
+//       const currentY = window.scrollY;
+
+//       if (currentY <= 10) {
+//         setScrolled(false);
+//       } else if (currentY < lastY) {
+//         setScrolled(true);
+//       } else if (currentY > lastY) {
+//         setScrolled(false);
+//       }
+
+//       lastY = currentY;
+//     };
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   return (
+//     <header
+//       className={`w-full fixed top-0 left-0 z-50 transition-all duration-500 ease-in-out ${
+//         scrolled ? "bg-white shadow-md" : "bg-transparent"
+//       }`}
+//     >
+//       {/* Main nav - hamburger left, logo centered, contact right */}
+//       <div className="relative flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-4 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
+//         {/* Hamburger menu toggle (left) */}
+//         <button
+//           className={`relative z-50 shrink-0 p-1.5 sm:p-2 rounded-full transition-colors ${
+//             menuOpen ? "text-[#007DCC]" : scrolled ? "text-[#007DCC]" : "text-white"
+//           }`}
+//           onClick={() => setMenuOpen(!menuOpen)}
+//           aria-label="Toggle menu"
+//           aria-expanded={menuOpen}
+//         >
+//           {menuOpen ? <X size={22} className="sm:w-6 sm:h-6" /> : <Menu size={22} className="sm:w-6 sm:h-6" />}
+//         </button>
+
+//         {/* Logo - always centered, scales down on small screens */}
+//         <a
+//           href="#home"
+//           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center shrink-0"
+//         >
+//           <img
+//             src="/images/logo.jpeg"
+//             alt="Logo"
+//             className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full object-cover transition-all duration-300"
+//           />
+//         </a>
+
+//         {/* Contact Us button (right, always filled bg-[#007dcc]) - visible from tablets up */}
+//         <a
+//           href="#contact"
+//           className="hidden md:flex items-center gap-2 bg-[#007dcc] hover:bg-[#0069ad] transition-colors text-white font-semibold pl-2 pr-4 lg:pr-5 py-1.5 lg:py-2 rounded-full text-sm lg:text-lg shrink-0 whitespace-nowrap"
+//         >
+//           <span className="w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-xs shrink-0">
+//             »
+//           </span>
+//           Contact Us
+//         </a>
+
+//         {/* Small-screen contact icon fallback - also filled bg-[#007dcc] */}
+//         <a
+//           href="#contact"
+//           className="flex md:hidden items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#007dcc] text-white shrink-0"
+//           aria-label="Contact Us"
+//         >
+//           <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
+//         </a>
+//       </div>
+
+//       {/* Overlay backdrop - blocks interaction with rest of page */}
+//       <div
+//         className={`fixed inset-0 bg-black/50 z-30 transition-opacity ease-in-out ${
+//           menuOpen ? "opacity-100 pointer-events-auto duration-500" : "opacity-0 pointer-events-none duration-500"
+//         }`}
+//         onClick={() => setMenuOpen(false)}
+//         aria-hidden="true"
+//       />
+
+//       {/* Slide-in menu panel with all nav items - fully responsive width */}
+//       <div
+//         className={`fixed top-0 left-0 h-full w-[85%] sm:w-80 max-w-[320px] bg-white z-40 shadow-2xl transform overflow-y-auto transition-transform ease-in-out duration-500 ${
+//           menuOpen ? "translate-x-0" : "-translate-x-full"
+//         }`}
+//       >
+//         <div className="px-5 sm:px-6 pb-6 pt-5 sm:pt-6 flex flex-col gap-1 text-gray-700 font-medium">
+//           <div className="flex items-center justify-between mb-5 sm:mb-6">
+//             <img src="/images/logo.jpeg" alt="Logo" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover" />
+//             <button
+//               onClick={() => setMenuOpen(false)}
+//               className="text-gray-500 hover:text-[#007DCC] p-1"
+//               aria-label="Close menu"
+//             >
+//               <X size={22} />
+//             </button>
+//           </div>
+
+//           {navLinks.map((link) => (
+//             <a
+//               key={link.label}
+//               href={link.href}
+//               onClick={() => setMenuOpen(false)}
+//               className={`py-2.5 sm:py-3 px-2 rounded-lg text-base sm:text-lg transition-colors hover:bg-blue-50 hover:text-[#007DCC] ${
+//                 link.active ? "text-[#007DCC]" : ""
+//               }`}
+//             >
+//               {link.label}
+//             </a>
+//           ))}
+
+//           <a
+//             href="#contact"
+//             onClick={() => setMenuOpen(false)}
+//             className="flex items-center justify-center gap-2 bg-[#007DCC] text-white font-semibold px-5 py-2.5 rounded-full mt-3 sm:mt-4 text-sm sm:text-base"
+//           >
+//             Contact Us
+//           </a>
+
+//           <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
+//             <a href="tel:+984-5667008" className="flex items-center gap-2 break-all">
+//               <Phone size={16} className="text-[#007DCC] shrink-0" /> +984-5667008
+//             </a>
+//             <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-2 break-all">
+//               <Mail size={16} className="text-[#007DCC] shrink-0" /> hsman.2078@gmail.com
+//             </a>
+//           </div>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
+
+
 import { useState, useEffect } from "react";
-import { Phone, Mail, ChevronDown, Menu, X } from "lucide-react";
+import { Phone, Mail, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [pageOpen, setPageOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   const navLinks = [
     { label: "Home", href: "#home", active: true },
     { label: "About Us", href: "#about" },
-    { label: "Volunteer", href: "#volunteer" },
+    { label: "Member", href: "#member" },
+    { label: "Agencies", href: "#agencies" },
+    { label: "Gallery", href: "#gallery" },
+    { label: "Our Team", href: "#team" },
+    { label: "FAQ", href: "#faq" },
+    { label: "News & Events", href: "#contact" },
   ];
 
-  // Lock background scroll/interaction when mobile menu is open
+  // Lock background scroll when hamburger menu is open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
+  // Track scroll direction: navbar slides out of view when scrolling down,
+  // slides back in with a solid background when scrolling up.
+  useEffect(() => {
+    let lastY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+
+      if (currentY <= 10) {
+        // At the very top -> always visible and transparent
+        setScrolled(false);
+        setHidden(false);
+      } else if (delta > 5) {
+        // Scrolling down -> hide navbar
+        setHidden(true);
+      } else if (delta < -5) {
+        // Scrolling up -> reveal navbar with background
+        setHidden(false);
+        setScrolled(true);
+      }
+
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="w-full border-b border-gray-200  ">
-      {/* Top info bar */}
-      <div className="flex bg-[#007dcc] flex-col md:flex-row md:items-center md:justify-between leading-relaxed px-4 sm:px-6 lg:px-12 py-2 md:py-3 border-b border-gray-100 text-[11px] sm:text-xs md:text-sm text-gray-500 gap-1.5 md:gap-0">
-        <p className="tracking-[1px] md:tracking-[2px] text-center md:text-left text-white">
-          WELCOME TO HOSPITALITY SALES & MARKETING ASSOCIATION NEPAL
-        </p>
-        <div className="flex items-center justify-center md:justify-end gap-4 md:gap-6 flex-wrap">
-          <a href="tel:+984-5667008" className="flex items-center gap-1.5 md:gap-2  transition-colors">
-            <Phone size={14} className="text-gray-200 shrink-0 md:w-4 md:h-4" />
-            <span className="text-white">+984-5667008</span>
+    <>
+      <header
+        className={`w-full fixed top-0 left-0 z-50 transition-transform duration-500 ease-in-out ${
+          scrolled ? "bg-white shadow-md" : "bg-transparent"
+        } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
+      >
+        {/* Main nav - hamburger left, logo centered, contact right */}
+        <div className="relative flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-4 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
+          {/* Hamburger menu toggle (left) */}
+          <button
+            className={`relative z-50 shrink-0 p-1.5 sm:p-2 rounded-full transition-colors ${
+              menuOpen ? "text-[#007DCC]" : scrolled ? "text-[#007DCC]" : "text-white"
+            }`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={22} className="sm:w-6 sm:h-6" /> : <Menu size={22} className="sm:w-6 sm:h-6" />}
+          </button>
+
+          {/* Logo - always centered, scales down on small screens */}
+          <a
+            href="#home"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center shrink-0"
+          >
+            <img
+              src="/images/logo.jpeg"
+              alt="Logo"
+              className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full object-cover transition-all duration-300"
+            />
           </a>
-          <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-1.5 md:gap-2  transition-colors">
-            <Mail size={14} className="text-gray-200 shrink-0 md:w-4 md:h-4" />
-            <span className="text-white">hsman.2078@gmail.com</span>
+
+          {/* Contact Us button (right, always filled bg-[#007dcc]) - visible from tablets up */}
+          <a
+            href="#contact"
+            className="hidden md:flex items-center gap-2 bg-[#007dcc] hover:bg-[#0069ad] transition-colors text-white font-semibold pl-2 pr-4 lg:pr-5 py-1.5 lg:py-2 rounded-full text-sm lg:text-lg shrink-0 whitespace-nowrap"
+          >
+            <span className="w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-xs shrink-0">
+              »
+            </span>
+            Contact Us
+          </a>
+
+          {/* Small-screen contact icon fallback - also filled bg-[#007dcc] */}
+          <a
+            href="#contact"
+            className="flex md:hidden items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#007dcc] text-white shrink-0"
+            aria-label="Contact Us"
+          >
+            <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
           </a>
         </div>
-      </div>
+      </header>
 
-      {/* Main nav */}
-      <div className="flex items-center justify-between px-6 lg:px-12 py-1 lg:py-2">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-1 text-2xl font-bold shrink-0">
-          <img src="/images/logo2.jpeg" alt="Logo" className="w-16 h-16" />
-        </a>
+      {/* Overlay backdrop - blocks interaction with rest of page.
+          Kept outside <header> so it's not affected by the header's translate-y. */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity ease-in-out ${
+          menuOpen ? "opacity-100 pointer-events-auto duration-500" : "opacity-0 pointer-events-none duration-500"
+        }`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
 
-        {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-8 text-gray-700 font-medium text-lg">
+      {/* Slide-in menu panel with all nav items - fully responsive width.
+          Kept outside <header> so it's not affected by the header's translate-y. */}
+      <div
+        className={`fixed top-0 left-0 h-full w-[85%] sm:w-80 max-w-[320px] bg-white z-50 shadow-2xl transform overflow-y-auto transition-transform ease-in-out duration-500 ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="px-5 sm:px-6 pb-6 pt-5 sm:pt-6 flex flex-col gap-1 text-gray-700 font-medium">
+          <div className="flex items-center justify-between mb-5 sm:mb-6">
+            <img src="/images/logo.jpeg" alt="Logo" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover" />
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-500 hover:text-[#007DCC] p-1"
+              aria-label="Close menu"
+            >
+              <X size={22} />
+            </button>
+          </div>
+
           {navLinks.map((link) => (
-            <a
+           <a 
               key={link.label}
               href={link.href}
-              className={`transition-colors hover:text-[#007DCC] ${
+              onClick={() => setMenuOpen(false)}
+              className={`py-2.5 sm:py-3 px-2 rounded-lg text-base sm:text-lg transition-colors hover:bg-blue-50 hover:text-[#007DCC] ${
                 link.active ? "text-[#007DCC]" : ""
               }`}
             >
@@ -63,115 +316,24 @@ export default function Navbar() {
             </a>
           ))}
 
-          <div
-            className="relative"
-            onMouseEnter={() => setPageOpen(true)}
-            onMouseLeave={() => setPageOpen(false)}
-          >
-            <button className="flex items-center gap-1 hover:text-[#007DCC] text-lg transition-colors">
-              Page <ChevronDown size={20} />
-            </button>
-            {pageOpen && (
-              <div className="absolute top-full left-0 mt-2 w-44 bg-white shadow-lg rounded-lg border border-gray-100 py-2 z-20">
-                <a href="#gallery" className="block px-4 py-2 text-md hover:bg-emerald-50 hover:text-[#007DCC]">
-                  Gallery
-                </a>
-                <a href="#team" className="block px-4 py-2 text-md hover:bg-emerald-50 hover:text-[#007DCC]">
-                  Our Team
-                </a>
-                <a href="#faq" className="block px-4 py-2 text-md hover:bg-emerald-50 hover:text-[#007DCC]">
-                  FAQ
-                </a>
-              </div>
-            )}
-          </div>
-
-          <a href="#contact" className="hover:text-[#007DCC] transition-colors">
-          News & Events
-          </a>
-        </nav>
-
-        {/* CTA button (desktop) */}
-        <a
-          href="#contact"
-          className="hidden lg:flex items-center gap-2 bg-[#007DCC] hover:bg-[#007DCC] transition-colors text-white font-semibold pl-2 pr-5 py-2 rounded-full text-lg"
-        >
-          <span className="w-7 h-7 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-xs">
-            »
-          </span>
-         Contact Us
-        </a>
-
-        {/* Mobile menu toggle */}
-        <button
-          className="lg:hidden text-gray-700 relative z-50"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </div>
-
-      {/* Overlay backdrop - blocks interaction with rest of page */}
-      <div
-        className={`lg:hidden fixed inset-0 bg-black/50 z-30 ${
-          menuOpen
-            ? "opacity-100 pointer-events-auto duration-1000"
-            : "opacity-0 pointer-events-none duration-[1500ms]"
-        } transition-opacity ease-in-out`}
-        onClick={() => setMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Mobile slide-in menu panel (right to left open, left to right close) */}
-      <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-72 max-w-[80%] bg-white z-40 shadow-2xl transform overflow-y-auto ${
-          menuOpen
-            ? "translate-x-0 duration-1000"
-            : "translate-x-full duration-[1500ms]"
-        } transition-transform ease-in-out`}
-      >
-        <div className="px-6 pb-6 pt-6 flex flex-col gap-4 text-gray-700 font-medium">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className={`${link.active ? "text-[#007DCC]" : ""}`}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a href="#gallery" onClick={() => setMenuOpen(false)}>
-            Gallery
-          </a>
-          <a href="#team" onClick={() => setMenuOpen(false)}>
-            Our Team
-          </a>
-          <a href="#faq" onClick={() => setMenuOpen(false)}>
-            FAQ
-          </a>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>
-            News & Events
-          </a>
-          <a
+<a          
             href="#contact"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-center gap-2 bg-[#007DCC] text-white font-semibold px-5 py-2.5 rounded-full mt-2"
+            className="flex items-center justify-center gap-2 bg-[#007DCC] text-white font-semibold px-5 py-2.5 rounded-full mt-3 sm:mt-4 text-sm sm:text-base"
           >
-          Contact Us
+            Contact Us
           </a>
 
-          <div className="flex flex-col gap-2 pt-4 border-t border-gray-100 text-sm text-gray-500">
-            <a href="tel:+984-5667008" className="flex items-center gap-2">
-              <Phone size={16} className="text-[#007DCC]" /> +984-5667008
+          <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
+            <a href="tel:+984-5667008" className="flex items-center gap-2 break-all">
+              <Phone size={16} className="text-[#007DCC] shrink-0" /> +984-5667008
             </a>
-            <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-2">
-              <Mail size={16} className="text-[#007DCC]" /> hsman.2078@gmail.com
+            <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-2 break-all">
+              <Mail size={16} className="text-[#007DCC] shrink-0" /> hsman.2078@gmail.com
             </a>
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }

@@ -25,19 +25,12 @@ export default function About() {
 
           {/* Right: heading, paragraph, CTA */}
           <div className="flex-1">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-[1.6] sm:leading-[1.5] lg:leading-[1.25] text-gray-900">
-              We bring people together to support those in{" "}
-              <span className="text-gray-400">
-                need by providing essential resources and opportunities,
-              </span>{" "}
-              for future communities everywhere.
+            <h2 className="text-2xl sm:text-3xl lg:text-3xl font-medium leading-[1.6] sm:leading-[1.5] lg:leading-[1.25] text-gray-900">
+             HSMA Nepal brings together hospitality sales and marketing professionals across Nepal to strengthen connections, share knowledge, and create opportunities for growth. Through collaboration, networking, and industry engagement, we work to elevate hospitality standards and support the growth of tourism in Nepal.
             </h2>
 
-            <p className="text-gray-500 text-sm sm:text-base leading-relaxed mt-6 max-w-5xl">
-              Uniting hearts and hands to uplift lives, we provide vital
-              support, guidance, and opportunities that empower individuals
-              and strengthen communities for a brighter, more hopeful
-              tomorrow.
+            <p className="text-gray-500 text-sm sm:text-lg leading-relaxed mt-6 max-w-5xl">
+            We are committed to building a stronger, more connected hospitality community through professional development, meaningful partnerships, and a shared vision for progress.
             </p>
 
             <a
@@ -60,10 +53,10 @@ export default function About() {
           <div className="flex items-center justify-center sm:block">
             <div>
               <p className="text-4xl sm:text-5xl font-bold text-gray-900">
-                200K
+                300+
               </p>
               <p className="text-gray-500 text-sm sm:text-base mt-2">
-                Happy Customer
+                 Members
               </p>
             </div>
           </div>
@@ -72,10 +65,10 @@ export default function About() {
             <div className="hidden sm:block absolute -left-20 top-0 h-16 w-px bg-gray-200" />
             <div>
               <p className="text-4xl sm:text-5xl font-bold text-gray-900">
-                12+
+                11
               </p>
               <p className="text-gray-500 text-sm sm:text-base mt-2">
-                Years Experience
+               Member Committee
               </p>
             </div>
           </div>
@@ -84,10 +77,10 @@ export default function About() {
             <div className="hidden sm:block absolute -left-20 top-0 h-16 w-px bg-gray-200" />
             <div>
               <p className="text-4xl sm:text-5xl font-bold text-gray-900">
-                24/7
+                60+
               </p>
               <p className="text-gray-500 text-sm sm:text-base mt-2">
-                Customer Support
+                Industry Representatives
               </p>
             </div>
           </div>
