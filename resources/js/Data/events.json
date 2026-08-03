@@ -1,0 +1,102 @@
+[
+  {
+    "id": "sales-meet-2026",
+    "image": "/images/event2.jpeg",
+    "date": "August 22, 2026",
+    "time": "10:00 AM",
+    "location": "Hotel Yak & Yeti, Kathmandu",
+    "title": "HSMAN Annual Sales Meet 2026",
+    "category": "Networking",
+    "type": "upcoming",
+    "excerpt": "Our flagship annual gathering bringing hospitality sales teams together to connect, share strategies, and build lasting industry relationships.",
+    "description": "The HSMAN Annual Sales Meet is our flagship gathering, bringing together hospitality sales and marketing professionals from hotels, resorts, travel agencies, and allied businesses across Nepal. This year's edition focuses on building stronger cross-property partnerships and sharing strategies for the upcoming tourist season.",
+    "agenda": [
+      { "time": "10:00 AM", "item": "Registration & welcome coffee" },
+      { "time": "10:30 AM", "item": "Opening remarks from HSMAN leadership" },
+      { "time": "11:00 AM", "item": "Panel: Trends shaping Nepal's hospitality sales" },
+      { "time": "1:00 PM", "item": "Networking lunch" },
+      { "time": "2:30 PM", "item": "Breakout roundtables by sector" },
+      { "time": "4:00 PM", "item": "Closing remarks & photo session" }
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&auto=format&fit=crop&q=70",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=500&auto=format&fit=crop&q=70",
+      "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=500&auto=format&fit=crop&q=70"
+    ]
+  },
+  {
+    "id": "digital-marketing-workshop",
+    "image": "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=700&auto=format&fit=crop&q=70",
+    "date": "September 5, 2026",
+    "time": "1:00 PM",
+    "location": "Hotel Himalaya, Kathmandu",
+    "title": "Digital Marketing Training Workshop",
+    "category": "Training",
+    "type": "upcoming",
+    "excerpt": "A hands-on session covering digital marketing strategies, branding, and social media engagement for hotel sales teams.",
+    "description": "This workshop covers essential and emerging areas of hospitality sales and marketing — including digital marketing strategies, brand positioning, customer service excellence, and social media engagement, led by industry experts.",
+    "agenda": [
+      { "time": "1:00 PM", "item": "Welcome & introductions" },
+      { "time": "1:30 PM", "item": "Digital marketing fundamentals" },
+      { "time": "3:00 PM", "item": "Social media strategy workshop" },
+      { "time": "4:30 PM", "item": "Q&A and closing" }
+    ],
+    "gallery": []
+  },
+  {
+    "id": "meet-greet-pokhara",
+    "image": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&auto=format&fit=crop&q=70",
+    "date": "September 18, 2026",
+    "time": "2:00 PM",
+    "location": "Pokhara Lakeside",
+    "title": "Meet & Greet with Hospitality Leaders",
+    "category": "Networking",
+    "type": "upcoming",
+    "excerpt": "An informal networking session connecting members with hospitality leaders across the Pokhara region.",
+    "description": "A relaxed, informal gathering by Pokhara Lakeside connecting HSMAN members with hospitality leaders from the region, encouraging open conversation and new partnerships.",
+    "agenda": [],
+    "gallery": []
+  },
+  {
+    "id": "blood-donation-2026",
+    "image": "https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=700&auto=format&fit=crop&q=70",
+    "date": "March 14, 2026",
+    "time": "9:00 AM",
+    "location": "Nepal Red Cross, Kathmandu",
+    "title": "Blood Donation Program",
+    "category": "CSR",
+    "type": "past",
+    "excerpt": "HSMAN members came together for a community blood donation drive in partnership with the Nepal Red Cross.",
+    "description": "HSMAN members came together for a community blood donation drive in partnership with the Nepal Red Cross, reflecting the association's commitment to giving back to the wider community.",
+    "agenda": [],
+    "gallery": []
+  },
+  {
+    "id": "networking-breakfast",
+    "image": "/images/event1.jpeg",
+    "date": "February 10, 2026",
+    "time": "11:00 AM",
+    "location": "Soaltee Kathmandu",
+    "title": "Networking Breakfast for Members",
+    "category": "Networking",
+    "type": "past",
+    "excerpt": "A morning of relationship-building over breakfast, welcoming new members into the HSMAN community.",
+    "description": "A morning of relationship-building over breakfast at Soaltee Kathmandu, welcoming new members into the HSMAN community and reconnecting existing ones.",
+    "agenda": [],
+    "gallery": []
+  },
+  {
+    "id": "tourism-promotion-panel",
+    "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&auto=format&fit=crop&q=70",
+    "date": "January 20, 2026",
+    "time": "3:00 PM",
+    "location": "Bhrikutimandap, Kathmandu",
+    "title": "Promoting Nepal Tourism Panel",
+    "category": "Tourism Promotion",
+    "type": "past",
+    "excerpt": "A panel discussion on joint sales missions and marketing campaigns to promote Nepal as a top travel destination.",
+    "description": "A panel discussion exploring joint sales missions and collaborative marketing campaigns aimed at promoting Nepal as a leading travel destination on the global stage.",
+    "agenda": [],
+    "gallery": []
+  }
+]

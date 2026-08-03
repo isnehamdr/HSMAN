@@ -86,8 +86,8 @@ export default function Footer() {
                   <a href="#membership" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Membership
                   </a>
-                  <a href="#programs" className="text-gray-600 hover:text-[#007DCC] transition-colors">
-                    Programs
+                  <a href="#agencies" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                    Agencies 
                   </a>
                   <a href="#contact" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Contact
@@ -98,7 +98,7 @@ export default function Footer() {
                     News & Events
                   </a>
                   <a href="#directory" className="text-gray-600 hover:text-[#007DCC] transition-colors">
-                    Member Directory
+                   Advisory 
                   </a>
                   <a href="#committee" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Executive Committee

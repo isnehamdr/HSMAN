@@ -27,6 +27,37 @@ Route::middleware('auth')->group(function () {
 Route::get('/', function () {
     return Inertia::render('HomePage');
 });
+Route::get('/about', function () {
+    return Inertia::render('AboutPage');
+});
+Route::get('/member', function () {
+    return Inertia::render('Member');
+});
+Route::get('/agency', function () {
+    return Inertia::render('Agencies');
+});
+Route::get('/services', function () {
+    return Inertia::render('Services');
+});
+
+Route::get('/new-events', function () {
+    $events = json_decode(File::get(resource_path('js/Data/events.json')), true);
+
+    return Inertia::render('NewsnEvents', [
+        'events' => $events,
+    ]);
+})->name('events.index');
+
+Route::get('/events/{event}', function (string $event) {
+    $events = json_decode(File::get(resource_path('js/Data/events.json')), true);
+    $data = collect($events)->firstWhere('id', $event);
+
+    abort_if(!$data, 404);
+
+    return Inertia::render('Eventsdetail', [
+        'event' => $data,
+    ]);
+})->name('events.show');
 
 
 require __DIR__.'/auth.php';
