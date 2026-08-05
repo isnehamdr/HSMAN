@@ -8,7 +8,7 @@ import Hero from '@/MainComponent/Hero'
 import PopularDestination from '@/MainComponent/PopularDestination'
 import Services from '@/MainComponent/Services'
 import Testimonial from '@/MainComponent/Testimonial'
-import UpcomingEvents from '@/MainComponent/Upcomingevents'
+
 import React from 'react'
 
 const HomePage = () => {
@@ -18,10 +18,11 @@ const HomePage = () => {
    <Hero/>
    <About/>
     <Services/>
-    <UpcomingEvents/>
+     <PopularDestination/>
    <Causes/>
+ 
    <Testimonial/>
-   <PopularDestination/>
+   
    <Blog/>
    <CtaBanner/>
    

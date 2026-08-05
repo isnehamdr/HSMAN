@@ -72,35 +72,35 @@ export default function Footer() {
               {/* Navigation links - increased text size */}
               <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
                 <div className="flex flex-col gap-3 text-base sm:text-lg">
-                  <a href="#home" className="text-[#007DCC] font-medium">
+                  <a href="/" className="text-[#007DCC] font-medium">
                     Home
                   </a>
-                  <a href="#about" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/about" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     About Us
                   </a>
-                  <a href="#gallery" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/gallery" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Gallery
                   </a>
                 </div>
                 <div className="flex flex-col gap-3 text-base sm:text-lg">
-                  <a href="#membership" className="text-gray-600 hover:text-[#007DCC] transition-colors">
-                    Membership
+                  <a href="/committee-members" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  Committee Members
                   </a>
-                  <a href="#agencies" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/agency" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Agencies 
                   </a>
-                  <a href="#contact" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/contact" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Contact
                   </a>
                 </div>
                 <div className="flex flex-col gap-3 text-base sm:text-lg">
-                  <a href="#events" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/events" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     News & Events
                   </a>
-                  <a href="#directory" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/committee-members" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                    Advisory 
                   </a>
-                  <a href="#committee" className="text-gray-600 hover:text-[#007DCC] transition-colors">
+                  <a href="/committee-members" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                     Executive Committee
                   </a>
                 </div>

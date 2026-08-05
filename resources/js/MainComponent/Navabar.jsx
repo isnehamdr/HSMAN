@@ -516,6 +516,205 @@
 
 
 
+// import { useState, useEffect } from "react";
+// import { Link, usePage } from "@inertiajs/react";
+// import { Phone, Mail, Menu, X } from "lucide-react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// export default function Navbar() {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
+//   const [hidden, setHidden] = useState(false);
+//   const [isTransitioning, setIsTransitioning] = useState(false);
+//   const { url } = usePage();
+
+//   const navLinks = [
+//     { label: "Home", to: "/", active: true },
+//     { label: "About Us", to: "/about" },
+//     { label: "Committee Members", to: "/committee-members" },
+//     { label: "Our Services", to: "/services" },
+//     { label: "Agencies", to: "/agency" },
+//     { label: "Gallery", to: "/gallery" },
+//     { label: "FAQ", to: "/faq" },
+//     { label: "New Events", to: "/new-events" },
+//   ];
+
+//   // Lock background scroll when hamburger menu is open
+//   useEffect(() => {
+//     document.body.style.overflow = menuOpen ? "hidden" : "";
+//     return () => {
+//       document.body.style.overflow = "";
+//     };
+//   }, [menuOpen]);
+
+//   // Track scroll direction
+//   useEffect(() => {
+//     let lastY = window.scrollY;
+
+//     const handleScroll = () => {
+//       const currentY = window.scrollY;
+//       const delta = currentY - lastY;
+
+//       if (currentY <= 10) {
+//         setScrolled(false);
+//         setHidden(false);
+//       } else if (delta > 5) {
+//         setHidden(true);
+//       } else if (delta < -5) {
+//         setHidden(false);
+//         setScrolled(true);
+//       }
+
+//       lastY = currentY;
+//     };
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   // Handle navigation with transition
+//   const handleNavigation = (e, to) => {
+//     e.preventDefault();
+//     setIsTransitioning(true);
+    
+//     // Close menu if open
+//     if (menuOpen) setMenuOpen(false);
+    
+//     // Navigate after a small delay for the transition
+//     setTimeout(() => {
+//       window.location.href = to;
+//     }, 300);
+//   };
+
+//   // Page transition overlay component
+//   const PageTransition = () => (
+//     <AnimatePresence>
+//       {isTransitioning && (
+//         <motion.div
+//           initial={{ scaleX: 0 }}
+//           animate={{ scaleX: 1 }}
+//           exit={{ scaleX: 0 }}
+//           transition={{ duration: 0.4, ease: "easeInOut" }}
+//           style={{ originX: 0 }}
+//           className="fixed inset-0 z-[100] bg-[#007DCC] pointer-events-none"
+//         />
+//       )}
+//     </AnimatePresence>
+//   );
+
+//   return (
+//     <>
+//       <PageTransition />
+      
+//       <header
+//         className={`w-full fixed top-0 left-0 z-50 transition-transform duration-500 ease-in-out ${
+//           scrolled ? "bg-white shadow-md" : "bg-transparent"
+//         } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
+//       >
+//         <div className="flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-4 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
+//           <Link   onClick={(e) => handleNavigation(e, "/")}className="flex items-center shrink-0">
+//             <img
+//               src="/images/logo.jpeg"
+//               alt="Logo"
+//               className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-22 lg:h-22 object-fit transition-all duration-300"
+//             />
+//           </Link>
+
+//           <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+//             <Link
+//                 onClick={(e) => handleNavigation(e, "/contact")}
+//               className="hidden md:flex items-center gap-2 bg-[#007dcc] hover:bg-[#0069ad] transition-colors text-white font-semibold pl-2 pr-4 lg:pr-5 py-1.5 lg:py-2 rounded-full text-sm lg:text-lg shrink-0 whitespace-nowrap"
+//             >
+//               <span className="w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-xs shrink-0">
+//                 »
+//               </span>
+//               Contact Us
+//             </Link>
+
+//             <Link
+//               href="/contact"
+//               className="flex md:hidden items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#007dcc] text-white shrink-0"
+//               aria-label="Contact Us"
+//             >
+//               <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
+//             </Link>
+
+//             <button
+//               className={`relative z-50 shrink-0 p-1.5 sm:p-2 rounded-full transition-colors ${
+//                 menuOpen ? "text-[#007DCC]" : scrolled ? "text-[#007DCC]" : "text-white"
+//               }`}
+//               onClick={() => setMenuOpen(!menuOpen)}
+//               aria-label="Toggle menu"
+//               aria-expanded={menuOpen}
+//             >
+//               {menuOpen ? <X size={22} className="sm:w-6 sm:h-6" /> : <Menu size={22} className="sm:w-6 sm:h-6" />}
+//             </button>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Overlay backdrop */}
+//       <div
+//         className={`fixed inset-0 bg-black/50 z-40 transition-opacity ease-in-out ${
+//           menuOpen ? "opacity-100 pointer-events-auto duration-500" : "opacity-0 pointer-events-none duration-500"
+//         }`}
+//         onClick={() => setMenuOpen(false)}
+//         aria-hidden="true"
+//       />
+
+//       {/* Slide-in menu panel */}
+//       <div
+//         className={`fixed top-0 left-0 h-full w-[85%] sm:w-80 max-w-[320px] bg-white z-50 shadow-2xl transform overflow-y-auto transition-transform ease-in-out duration-500 ${
+//           menuOpen ? "translate-x-0" : "-translate-x-full"
+//         }`}
+//       >
+//         <div className="px-5 sm:px-6 pb-6 pt-5 sm:pt-6 flex flex-col gap-1 text-gray-700 font-medium">
+//           <div className="flex items-center justify-between mb-5 sm:mb-6">
+//             <img src="/images/logo.jpeg" alt="Logo" className="w-12 h-12 sm:w-24 sm:h-24 rounded-full object-cover" />
+//             <button
+//               onClick={() => setMenuOpen(false)}
+//               className="text-gray-500 hover:text-[#007DCC] p-1"
+//               aria-label="Close menu"
+//             >
+//               <X size={22} />
+//             </button>
+//           </div>
+
+//           {navLinks.map((link) => (
+//             <a
+//               key={link.label}
+//               href={link.to}
+//               onClick={(e) => handleNavigation(e, link.to)}
+//               className={`py-2.5 sm:py-3 px-2 rounded-lg text-base sm:text-lg transition-colors hover:bg-blue-50 hover:text-[#007DCC] ${
+//                 url === link.to ? "text-[#007DCC] bg-blue-50" : ""
+//               }`}
+//             >
+//               {link.label}
+//             </a>
+//           ))}
+
+//           <a
+//             href="/contact"
+//             onClick={(e) => handleNavigation(e, "/contact")}
+//             className="flex items-center justify-center gap-2 bg-[#007DCC] text-white font-semibold px-5 py-2.5 rounded-full mt-3 sm:mt-4 text-sm sm:text-base"
+//           >
+//             Contact Us
+//           </a>
+
+//           <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
+//             <a href="tel:+984-5667008" className="flex items-center gap-2 break-all">
+//               <Phone size={16} className="text-[#007DCC] shrink-0" /> +984-5667008
+//             </a>
+//             <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-2 break-all">
+//               <Mail size={16} className="text-[#007DCC] shrink-0" /> hsman.2078@gmail.com
+//             </a>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
 import { useState, useEffect } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { Phone, Mail, Menu, X } from "lucide-react";
@@ -583,10 +782,10 @@ export default function Navbar() {
     // Navigate after a small delay for the transition
     setTimeout(() => {
       window.location.href = to;
-    }, 300);
+    }, 400);
   };
 
-  // Page transition overlay component
+  // Page transition overlay component with logo
   const PageTransition = () => (
     <AnimatePresence>
       {isTransitioning && (
@@ -594,10 +793,67 @@ export default function Navbar() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           exit={{ scaleX: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
           style={{ originX: 0 }}
-          className="fixed inset-0 z-[100] bg-[#007DCC] pointer-events-none"
-        />
+          className="fixed inset-0 z-[100] bg-[#007DCC] flex items-center justify-center pointer-events-none"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex flex-col items-center gap-4"
+          >
+            {/* Logo animation */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl animate-pulse" />
+              <img
+                src="/images/logo.jpeg"
+                alt="Logo"
+                className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 border-white/30 shadow-2xl relative z-10"
+              />
+            </div>
+            
+            {/* Brand name or tagline */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-white text-center"
+            >
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
+                HSMAN Nepal
+              </h2>
+              <p className="text-white/80 text-xs sm:text-sm font-light tracking-wider mt-1">
+                Hospitality & Service Management
+              </p>
+            </motion.div>
+
+            {/* Loading dots animation */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex gap-1.5 mt-2"
+            >
+              {[0, 1, 2].map((index) => (
+                <motion.div
+                  key={index}
+                  animate={{
+                    y: ["0%", "-100%", "0%"],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    delay: index * 0.15,
+                    ease: "easeInOut",
+                  }}
+                  className="w-2 h-2 bg-white rounded-full"
+                />
+              ))}
+            </motion.div>
+          </motion.div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
@@ -612,17 +868,17 @@ export default function Navbar() {
         } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div className="flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-4 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
-          <Link   onClick={(e) => handleNavigation(e, "/")}className="flex items-center shrink-0">
+          <Link onClick={(e) => handleNavigation(e, "/")} className="flex items-center shrink-0">
             <img
               src="/images/logo.jpeg"
               alt="Logo"
-              className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-22 lg:h-22 object-fit transition-all duration-300"
+              className="w-16 h-16 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-22 lg:h-22 object-fit transition-all duration-300"
             />
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
             <Link
-                onClick={(e) => handleNavigation(e, "/contact")}
+              onClick={(e) => handleNavigation(e, "/contact")}
               className="hidden md:flex items-center gap-2 bg-[#007dcc] hover:bg-[#0069ad] transition-colors text-white font-semibold pl-2 pr-4 lg:pr-5 py-1.5 lg:py-2 rounded-full text-sm lg:text-lg shrink-0 whitespace-nowrap"
             >
               <span className="w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-xs shrink-0">
@@ -670,7 +926,9 @@ export default function Navbar() {
       >
         <div className="px-5 sm:px-6 pb-6 pt-5 sm:pt-6 flex flex-col gap-1 text-gray-700 font-medium">
           <div className="flex items-center justify-between mb-5 sm:mb-6">
-            <img src="/images/logo.jpeg" alt="Logo" className="w-12 h-12 sm:w-24 sm:h-24 rounded-full object-cover" />
+            <Link onClick={(e) => handleNavigation(e, "/")}>
+              <img src="/images/logo.jpeg" alt="Logo" className="w-12 h-12 sm:w-24 sm:h-24 rounded-full object-cover" />
+            </Link>
             <button
               onClick={() => setMenuOpen(false)}
               className="text-gray-500 hover:text-[#007DCC] p-1"

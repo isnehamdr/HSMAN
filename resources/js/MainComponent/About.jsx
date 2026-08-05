@@ -34,7 +34,7 @@ export default function About() {
             </p>
 
             <a
-              href="#about"
+              href="/about"
               className="inline-flex items-center gap-2 bg-[#007dcc]  transition-colors text-white font-semibold pl-2 pr-6 py-2.5 rounded-full mt-8 w-fit"
             >
               <span className="w-7 h-7 rounded-full bg-white text-[#007dcc] flex items-center justify-center text-xs">
@@ -49,7 +49,7 @@ export default function About() {
         <div className="h-px bg-gray-200 mt-14 sm:mt-16" />
 
         {/* Stats row */}
-         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 pt-10 sm:pt-12 justify-items-left text-center">
+         <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-6 pt-10 sm:pt-12 justify-items-left text-center">
           <div className="flex items-center justify-center sm:block">
             <div>
               <p className="text-4xl sm:text-5xl font-bold text-gray-900">
@@ -81,6 +81,17 @@ export default function About() {
               </p>
               <p className="text-gray-500 text-sm sm:text-base mt-2">
                 Industry Representatives
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center sm:block relative">
+            <div className="hidden sm:block absolute -left-20 top-0 h-16 w-px bg-gray-200" />
+            <div>
+              <p className="text-4xl sm:text-5xl font-bold text-gray-900">
+                7
+              </p>
+              <p className="text-gray-500 text-sm sm:text-base mt-2">
+                Province Represented
               </p>
             </div>
           </div>

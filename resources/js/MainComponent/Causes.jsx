@@ -3,7 +3,7 @@ import { Clock } from "lucide-react";
 const programs = [
   {
     image:
-      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&auto=format&fit=crop&q=70",
+      "/images/event2.jpeg",
     tag: "Networking",
     title: "HSMAN Sales Meet",
     description:
@@ -21,7 +21,7 @@ const programs = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=800&auto=format&fit=crop&q=70",
+      "/images/event1.jpeg",
     tag: "Training",
     title: "Meet & Greet Program",
     description:
@@ -116,7 +116,7 @@ export default function Programs() {
                     {program.days} Days
                   </span> */}
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="inline-flex items-center gap-2 bg-[#007DCC] hover:bg-[#0066a8] transition-colors text-white font-semibold pl-1.5 pr-4 py-2 rounded-full text-sm"
                   >
                     <span className="w-5 h-5 rounded-full bg-white text-[#007DCC] flex items-center justify-center text-[10px]">
