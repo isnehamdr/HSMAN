@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    font-family: 'almarai', sans-serif;
+p, a, span {
+    font-family: 'Almarai', sans-serif;
+}
+
+/* Define the font properly */
+@font-face {
+    font-family: 'Balance';
+    src: url('/fonts/Balance.woff2') format('woff2'),
+         url('/fonts/Balance.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Add this for better loading */
+}
+
+/* Apply to headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Balance';
+    /* Remove 'serif' fallback, use sans-serif instead */
 }

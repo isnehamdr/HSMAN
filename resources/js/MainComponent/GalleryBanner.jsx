@@ -1,14 +1,14 @@
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 
-export default function MemberBanner() {
+export default function GalleryBanner() {
   return (
    <section className="relative w-full overflow-hidden pt-28 pb-10 sm:pt-24 sm:pb-14 min-h-[460px]">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/img5.jpeg')`,
+          backgroundImage: `url('/images/img4.jpeg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
 
@@ -23,7 +23,7 @@ export default function MemberBanner() {
         <div className="flex flex-col items-center justify-center text-center">
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-4">
-            Home / Committee Members
+            Home / Gallery
           </h1>
           
        

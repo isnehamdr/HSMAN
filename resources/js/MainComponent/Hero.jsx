@@ -57,7 +57,7 @@ export default function Hero() {
         {/* Bottom content row */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           {/* Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] max-w-xl">
+          <h1 className="font-balance text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] max-w-xl">
             Your network,
             <br />
             built on hospitality

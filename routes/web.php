@@ -30,7 +30,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('AboutPage');
 });
-Route::get('/member', function () {
+Route::get('/committee-members', function () {
     return Inertia::render('Member');
 });
 Route::get('/agency', function () {
@@ -38,6 +38,18 @@ Route::get('/agency', function () {
 });
 Route::get('/services', function () {
     return Inertia::render('Services');
+});
+Route::get('/gallery', function () {
+    return Inertia::render('Gallery');
+});
+Route::get('/faq', function () {
+    return Inertia::render('FAQ');
+});
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
+Route::get('/popular-destinations', function () {
+    return Inertia::render('Destinations');
 });
 
 Route::get('/new-events', function () {

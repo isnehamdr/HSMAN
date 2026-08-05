@@ -64,7 +64,7 @@ export default function EventDetails() {
 
       {/* Meta bar */}
       <section className="border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-10 lg:px-16 py-5 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm sm:text-base text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-0 py-5 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm sm:text-base text-gray-600">
           <span className="flex items-center gap-2">
             <CalendarDays size={18} className="text-[#007DCC]" />
             {event.date}
@@ -85,7 +85,7 @@ export default function EventDetails() {
       </section>
 
       {/* Content */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-10 lg:px-16 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+      <section className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-0 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
         {/* Description + agenda */}
         <div className="lg:col-span-2 flex flex-col gap-10">
           <div>

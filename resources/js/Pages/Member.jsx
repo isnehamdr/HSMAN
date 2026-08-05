@@ -82,7 +82,7 @@ const Member = () => {
     <div className="min-h-screen bg-white px-4 py-16 sm:px-8 lg:px-0">
       {/* Services Component - Rendered at the top */}
      
-      <Services />
+      {/* <Services /> */}
       
 
       {/* Executive Committee Section */}
