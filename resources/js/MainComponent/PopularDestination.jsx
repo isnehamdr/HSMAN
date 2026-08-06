@@ -357,7 +357,7 @@ const PopularDestination = () => {
           {featured.map((dest) => (
             <a
               key={dest.slug}
-              href={`/destinations/${dest.slug}`}
+              href="/popular-destinations"
               className="group relative rounded-md overflow-hidden block cursor-pointer"
             >
               <div className="w-full aspect-[4/3] overflow-hidden">
@@ -385,8 +385,8 @@ const PopularDestination = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 min-h-[280px]">
               {visibleItems.map((item) => (
                 <a
-                  key={item.slug}
-                  href={`/destinations/${item.slug}`}
+                  
+                  href="/popular-destinations"
                   className="relative rounded-xl overflow-hidden aspect-[4/3] group block cursor-pointer"
                 >
                   <img
