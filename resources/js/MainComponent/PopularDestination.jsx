@@ -248,7 +248,7 @@ import React, { useState, useEffect, useCallback } from "react";
 const featured = [
   {
     title: "Pashupatinath Temple",
-    image: "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=600&auto=format&fit=crop&q=70",
+    image: "/images/pashupati.jpeg",
     slug: "pashupatinath-temple",
   },
   {
@@ -258,7 +258,7 @@ const featured = [
   },
   {
     title: "Chitwan National Park",
-    image: "https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=600&auto=format&fit=crop&q=70",
+    image: "/images/chitwan.jpeg",
     slug: "chitwan-national-park",
   },
 ];
@@ -266,10 +266,10 @@ const featured = [
 const others = [
   { name: "Everest Base Camp", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&auto=format&fit=crop&q=70", slug: "everest-base-camp" },
   { name: "Boudhanath Stupa", image: "/images/img7.jpeg", slug: "boudhanath-stupa" },
-  { name: "Lumbini", image: "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=500&auto=format&fit=crop&q=70", slug: "lumbini" },
-  { name: "Annapurna Circuit", image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=500&auto=format&fit=crop&q=70", slug: "annapurna-circuit" },
-  { name: "Kathmandu Durbar Square", image: "/images/img6.jpeg", slug: "kathmandu-durbar-square" },
-  { name: "Swayambhunath Stupa", image: "/images/img7.jpeg", slug: "swayambhunath-stupa" },
+  { name: "Lumbini", image: "/images/lumbini.jpeg", slug: "lumbini" },
+  { name: "Annapurna Circuit", image: "/images/annapurna.jpeg", slug: "annapurna-circuit" },
+  // { name: "Kathmandu Durbar Square", image: "/images/img6.jpeg", slug: "kathmandu-durbar-square" },
+  // { name: "Swayambhunath Stupa", image: "/images/img7.jpeg", slug: "swayambhunath-stupa" },
 ];
 
 /**
@@ -355,11 +355,11 @@ const PopularDestination = () => {
         {/* Featured Cards */}
         <div className="sm:flex hidden grid grid-cols-1 sm:grid-cols-3 gap-6">
           {featured.map((dest) => (
-            <a
-              key={dest.slug}
-              href="/popular-destinations"
-              className="group relative rounded-md overflow-hidden block cursor-pointer"
-            >
+  <a
+    key={dest.slug}
+    href={`/popular-destinations#${dest.slug}`}
+    className="group relative rounded-md overflow-hidden block cursor-pointer"
+  >
               <div className="w-full aspect-[4/3] overflow-hidden">
                 <img
                   src={dest.image.trim()}
@@ -383,12 +383,12 @@ const PopularDestination = () => {
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 min-h-[280px]">
-              {visibleItems.map((item) => (
-                <a
-                  
-                  href="/popular-destinations"
-                  className="relative rounded-xl overflow-hidden aspect-[4/3] group block cursor-pointer"
-                >
+             {visibleItems.map((item) => (
+  <a
+    key={item.slug}
+    href={`/popular-destinations#${item.slug}`}
+    className="relative rounded-xl overflow-hidden aspect-[4/3] group block cursor-pointer"
+  >
                   <img
                     src={item.image.trim()}
                     alt={item.name}
@@ -406,7 +406,7 @@ const PopularDestination = () => {
 
           {/* Dot Indicators */}
           {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mt-6">
+            <div className="md:hidden block flex justify-center gap-2 mt-6">
               {Array.from({ length: totalPages }).map((_, index) => (
                 <button
                   key={index}

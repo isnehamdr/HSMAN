@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MapPin } from "lucide-react";
 import GalleryBanner from "@/MainComponent/GalleryBanner";
 
 const destinations = [
   {
     name: "Pashupatinath Temple",
+    slug: "pashupatinath-temple",
     location: "Kathmandu",
     image:
-      "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&auto=format&fit=crop&q=70",
+      "/images/pashupati.jpeg",
     description:
       "One of the holiest Hindu temples in the world, Pashupatinath sits on the banks of the sacred Bagmati River in Kathmandu. A UNESCO World Heritage Site, it draws pilgrims, sadhus, and visitors year-round, especially during Maha Shivaratri.",
   },
   {
     name: "Boudhanath Stupa",
+    slug: "boudhanath-stupa",
     location: "Kathmandu",
     image:
       "/images/img7.jpeg",
@@ -21,6 +23,7 @@ const destinations = [
   },
   {
     name: "Phewa Lake, Pokhara",
+    slug: "phewa-lake-pokhara",
     location: "Pokhara",
     image:
       "/images/img1.jpeg",
@@ -29,14 +32,16 @@ const destinations = [
   },
   {
     name: "Annapurna Circuit",
+    slug: "annapurna-circuit",
     location: "Annapurna Region",
     image:
-      "https://images.unsplash.com/photo-1551632811-561732d1e306?w=700&auto=format&fit=crop&q=70",
+      "/images/annapurna.jpeg",
     description:
       "One of the world's classic trekking routes, the Annapurna Circuit winds through terraced farmland, rhododendron forests, and high mountain passes, offering some of the most varied scenery in the Himalayas.",
   },
   {
     name: "Everest Base Camp",
+    slug: "everest-base-camp",
     location: "Solukhumbu",
     image:
       "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&auto=format&fit=crop&q=70",
@@ -45,31 +50,48 @@ const destinations = [
   },
   {
     name: "Chitwan National Park",
+    slug: "chitwan-national-park",
     location: "Chitwan",
     image:
-      "https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=700&auto=format&fit=crop&q=70",
+      "/images/chitwan.jpeg",
     description:
       "A UNESCO World Heritage jungle in the Terai lowlands, home to one-horned rhinos, Bengal tigers, and rich biodiversity. Explore by jeep safari, canoe ride, or guided jungle walk.",
   },
   {
     name: "Lumbini",
+    slug: "lumbini",
     location: "Rupandehi",
     image:
-      "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=700&auto=format&fit=crop&q=70",
+      "/images/lumbini.jpeg",
     description:
       "The birthplace of Lord Buddha and a UNESCO World Heritage Site, Lumbini is a place of pilgrimage and quiet reflection, with monasteries built by Buddhist communities from around the world.",
   },
   {
     name: "Bhaktapur Durbar Square",
+    slug: "bhaktapur-durbar-square",
     location: "Bhaktapur",
     image:
-      "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=700&auto=format&fit=crop&q=70",
+      "/images/bhaktapur.jpeg",
     description:
       "A beautifully preserved medieval city famed for its intricate wood and stone carvings, pottery squares, and royal palace complex — one of the best-preserved examples of Newari architecture in Nepal.",
   },
 ];
 
 export default function Destinations() {
+  // Scroll to the matching section when arriving via #slug
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <>
     <GalleryBanner/>
@@ -94,10 +116,11 @@ export default function Destinations() {
         <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
           {destinations.map((dest, index) => (
             <div
-              key={dest.name}
+              key={dest.slug}
+              id={dest.slug}
               className={`flex flex-col ${
                 index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              } gap-6 sm:gap-8 lg:gap-12 items-center  transition-shadow`}
+              } gap-6 sm:gap-8 lg:gap-12 items-center scroll-mt-24 transition-shadow`}
             >
               {/* Image */}
               <div className="w-full lg:w-1/2 h-64 sm:h-80 lg:h-[400px] overflow-hidden">
@@ -107,7 +130,7 @@ export default function Destinations() {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              
+
               {/* Content */}
               <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col">
                 <span className="flex items-center gap-1.5 text-xl text-[#007DCC] font-semibold uppercase tracking-wide mb-2">
