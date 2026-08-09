@@ -735,7 +735,7 @@ export default function Navbar() {
     { label: "Agencies", to: "/agency" },
     { label: "Gallery", to: "/gallery" },
     { label: "FAQ", to: "/faq" },
-    { label: "New Events", to: "/new-events" },
+    { label: "Events", to: "/events" },
   ];
 
   // Lock background scroll when hamburger menu is open
@@ -867,12 +867,12 @@ export default function Navbar() {
           scrolled ? "bg-white shadow-md" : "bg-transparent"
         } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
       >
-        <div className="flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-4 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
+        <div className="flex items-center justify-between px-3 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-2 min-h-[64px] sm:min-h-[72px] lg:min-h-[88px]">
           <Link onClick={(e) => handleNavigation(e, "/")} className="flex items-center shrink-0">
             <img
               src="/images/logo.jpeg"
               alt="Logo"
-              className="w-16 h-16 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-22 lg:h-22 object-fit transition-all duration-300"
+              className="w-16 h-16 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-24 lg:h-24 object-fit transition-all duration-300"
             />
           </Link>
 
@@ -960,8 +960,8 @@ export default function Navbar() {
           </a>
 
           <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
-            <a href="tel:+984-5667008" className="flex items-center gap-2 break-all">
-              <Phone size={16} className="text-[#007DCC] shrink-0" /> +984-5667008
+            <a href="tel:+977-9764596097" className="flex items-center gap-2 break-all">
+              <Phone size={16} className="text-[#007DCC] shrink-0" />+977 9764596097
             </a>
             <a href="mailto:hsman.2078@gmail.com" className="flex items-center gap-2 break-all">
               <Mail size={16} className="text-[#007DCC] shrink-0" /> hsman.2078@gmail.com

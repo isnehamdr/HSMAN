@@ -52,7 +52,7 @@ Route::get('/popular-destinations', function () {
     return Inertia::render('Destinations');
 });
 
-Route::get('/new-events', function () {
+Route::get('/events', function () {
     $events = json_decode(File::get(resource_path('js/Data/events.json')), true);
 
     return Inertia::render('NewsnEvents', [

@@ -253,7 +253,7 @@ const featured = [
   },
   {
     title: "Phewa Lake, Pokhara",
-    image: "/images/img1.jpeg",
+    image: "/images/img1.png",
     slug: "phewa-lake-pokhara",
   },
   {
@@ -265,7 +265,7 @@ const featured = [
 
 const others = [
   { name: "Everest Base Camp", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&auto=format&fit=crop&q=70", slug: "everest-base-camp" },
-  { name: "Boudhanath Stupa", image: "/images/img7.jpeg", slug: "boudhanath-stupa" },
+  { name: "Boudhanath Stupa", image: "/images/img7.png", slug: "boudhanath-stupa" },
   { name: "Lumbini", image: "/images/lumbini.jpeg", slug: "lumbini" },
   { name: "Annapurna Circuit", image: "/images/annapurna.jpeg", slug: "annapurna-circuit" },
   // { name: "Kathmandu Durbar Square", image: "/images/img6.jpeg", slug: "kathmandu-durbar-square" },
@@ -353,27 +353,28 @@ const PopularDestination = () => {
         </div>
 
         {/* Featured Cards */}
-        <div className="sm:flex hidden grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {featured.map((dest) => (
-  <a
-    key={dest.slug}
-    href={`/popular-destinations#${dest.slug}`}
-    className="group relative rounded-md overflow-hidden block cursor-pointer"
-  >
-              <div className="w-full aspect-[4/3] overflow-hidden">
-                <img
-                  src={dest.image.trim()}
-                  alt={dest.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="absolute inset-[4px] border-2 border-white/80 rounded-2xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
-                <h3 className="text-xl sm:text-2xl font-semibold text-white">{dest.title}</h3>
-              </div>
-            </a>
-          ))}
-        </div>
+       {/* Featured Cards */}
+<div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-6">
+  {featured.map((dest) => (
+    <a
+      key={dest.slug}
+      href={`/popular-destinations#${dest.slug}`}
+      className="group relative rounded-md overflow-hidden block cursor-pointer"
+    >
+      <div className="w-full aspect-[4/3] overflow-hidden">
+        <img
+          src={dest.image.trim()}
+          alt={dest.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div className="absolute inset-[4px] border-2 border-white/80 rounded-2xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+        <h3 className="text-xl sm:text-2xl font-semibold text-white">{dest.title}</h3>
+      </div>
+    </a>
+  ))}
+</div>
 
         {/* Carousel Section */}
         <div className="mt-12">

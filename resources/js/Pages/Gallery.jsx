@@ -5,14 +5,12 @@ import GalleryBanner from "@/MainComponent/GalleryBanner";
 const categories = ["All", "Sales Meet", "CSR", "Training", "Networking"];
 
 const images = [
-  { src: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=700&auto=format&fit=crop&q=70", category: "Sales Meet", title: "HSMAN Annual Sales Meet" },
-  { src: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=700&auto=format&fit=crop&q=70", category: "CSR", title: "Blood Donation Program" },
-  { src: "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=700&auto=format&fit=crop&q=70", category: "Training", title: "Digital Marketing Workshop" },
-  { src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&auto=format&fit=crop&q=70", category: "Networking", title: "Meet & Greet Pokhara" },
-  { src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&auto=format&fit=crop&q=70", category: "Networking", title: "Networking Breakfast" },
-  { src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&auto=format&fit=crop&q=70", category: "Sales Meet", title: "Tourism Promotion Panel" },
-  { src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&auto=format&fit=crop&q=70", category: "CSR", title: "Community Outreach" },
-  { src: "https://images.unsplash.com/photo-1560523159-4a9692d222f8?w=700&auto=format&fit=crop&q=70", category: "Training", title: "Customer Service Masterclass" },
+  { src: "/images/event2.jpeg", category: "Sales Meet", title: "HSMAN Annual Sales Meet" },
+  { src: "/images/event1.jpeg", category: "CSR", title: "Blood Donation Program" },
+  { src: "/images/g1.jpg", category: "Training", title: "Digital Marketing Workshop" },
+  { src: "/images/g2.jpg", category: "Networking", title: "Meet & Greet Pokhara" },
+  { src: "/images/g3.png", category: "Networking", title: "Networking Breakfast" },
+
 ];
 
 export default function Gallery() {
@@ -29,9 +27,9 @@ export default function Gallery() {
 
 <GalleryBanner/>
 
-<div className="w-full font-sans bg-white">
+<div className="w-full bg-white">
       {/* Header */}
-      <section className="px-4 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-12 sm:pb-16 text-center">
+      <section className="px-4 sm:px-10 lg:px-16 pt-12 sm:pt-24 pb-12 sm:pb-16 text-center">
         <span className="inline-flex items-center gap-2 border border-[#007DCC]/30 bg-[#007DCC]/5 text-[#007DCC] text-xs sm:text-sm font-semibold tracking-[2px] uppercase px-5 py-2 rounded-full mb-6">
           Gallery
         </span>
@@ -65,7 +63,7 @@ export default function Gallery() {
 
       {/* Image grid */}
       <section className="px-4 sm:px-10 lg:px-16 pb-20 sm:pb-28">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {filtered.map((img, i) => (
             <button
               key={i}

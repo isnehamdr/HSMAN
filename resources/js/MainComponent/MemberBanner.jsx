@@ -8,7 +8,7 @@ export default function MemberBanner() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/img5.jpeg')`,
+          backgroundImage: `url('/images/img5.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
 

@@ -81,11 +81,11 @@ export default function Testimonial() {
             >
               {/* Avatar + quote icon */}
               <div className="flex items-center justify-between">
-                <img
+                {/* <img
                   src={t.image}
                   alt={t.name}
                   className="w-12 h-12 rounded-full object-cover"
-                />
+                /> */}
                 <span className="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center">
                   <Quote size={16} fill="white" />
                 </span>

@@ -23,7 +23,7 @@ const Backtotop = () => {
   // WhatsApp click handler
   const handleWhatsApp = () => {
     // Replace with your WhatsApp number
-    const phoneNumber = '1234567890';
+    const phoneNumber = '9779764596097';
     const message = 'Hello, I need assistance!';
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };

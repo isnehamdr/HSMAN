@@ -4,22 +4,22 @@ const posts = [
     category: "Networking",
     title: "Building Stronger Bonds Across Nepal's Hospitality Industry",
     image:
-      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&auto=format&fit=crop&q=70",
+      "/images/event2.jpeg",
   },
   {
     date: "February 17, 2026",
     category: "CSR",
     title: "HSMAN's Blood Donation Drive Brings the Community Together",
     image:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&auto=format&fit=crop&q=70",
+      "/images/g1.jpg",
   },
   {
     date: "February 19, 2026",
     category: "Training",
     title: "Digital Marketing Skills Every Hotel Sales Team Needs",
     image:
-      "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=700&auto=format&fit=crop&q=70",
-  },
+        "/images/event1.jpeg",
+    },
 ];
 
 export default function Blog() {

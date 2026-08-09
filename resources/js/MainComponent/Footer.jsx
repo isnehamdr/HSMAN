@@ -95,7 +95,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col gap-3 text-base sm:text-lg">
                   <a href="/events" className="text-gray-600 hover:text-[#007DCC] transition-colors">
-                    News & Events
+                    Events
                   </a>
                   <a href="/committee-members" className="text-gray-600 hover:text-[#007DCC] transition-colors">
                    Advisory 
@@ -109,14 +109,14 @@ export default function Footer() {
               {/* Social icons - increased size */}
               <div className="flex gap-3 shrink-0">
                 <a
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/people/Hospitality-Sales-and-Marketing-Association-Nepal/61572936422358/?mibextid=wwXIfr&rdid=qSk1Jhk6IJ3v4zJx&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19BRTw5bDm%2F%3Fmibextid%3DwwXIfrm"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-14 h-14 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
                 >
                   <FacebookIcon />
                 </a>
-                <a
+                {/* <a
                   href="#instagram"
                   className="w-14 h-14 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
                 >
@@ -127,17 +127,32 @@ export default function Footer() {
                   className="w-14 h-14 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
                 >
                   <LinkedinIcon />
-                </a>
+                </a> */}
               </div>
             </div>
 
-            {/* Contact + copyright - increased text size */}
+          {/* Contact + copyright - increased text size */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm sm:text-base text-gray-500">
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
                 <span>hsman.2078@gmail.com</span>
                 <span>Kathmandu, Nepal</span>
               </div>
               <span>© HSMAN 2026. All rights reserved.</span>
+            </div>
+
+            {/* Crafted by section */}
+            <div className="flex items-center justify-center sm:justify-end text-sm sm:text-lg text-gray-400 pt-4 border-t border-gray-100">
+              <span>
+                Crafted by{" "}
+                <a
+                  href="https://sait.com.np/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-[#007DCC] font-medium transition-colors"
+                >
+                  S.A I.T Solution Nepal
+                </a>
+              </span>
             </div>
           </div>
         </div>

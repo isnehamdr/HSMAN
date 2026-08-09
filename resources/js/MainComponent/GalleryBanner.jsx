@@ -8,7 +8,7 @@ export default function GalleryBanner() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/img4.jpeg')`,
+          backgroundImage: `url('/images/img4.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
 

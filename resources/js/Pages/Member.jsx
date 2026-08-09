@@ -6,7 +6,7 @@ import MemberBanner from "@/MainComponent/MemberBanner";
 const team = [
   { role: "President", name: "Rabinson Maharjan", phone: "+977 9849055337" },
   { role: "Vice President", name: "Sanjeev Tuladhar", phone: "+977 9841322199" },
-  { role: "General Secretary", name: "Dipak Pokhrel", phone: "+977 9764596097 / +977 9862111047" },
+  { role: "General Secretary", name: "Dipak Pokhrel", phone: "+977 9764596097 ", image: "/images/dipak.jpeg" },
   { role: "Secretary", name: "Laxmi Shrestha", phone: "+977 9841361808" },
   { role: "Treasurer", name: "Ganesh Budhathoki", phone: "+977 9860825198" },
 ];
@@ -29,20 +29,28 @@ function TeamCard({ member }) {
   return (
     <div className="flex flex-col items-center rounded-xl bg-slate-50 px-6 py-10 text-center">
       <div className="mb-6 flex h-28 w-28 items-center justify-center rounded-full bg-[#007dcc] p-1.5">
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
-          <User size={40} className="text-[#007DCC]" />
+        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white">
+          {member.image ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className="h-full w-full rounded-full object-cover"
+            />
+          ) : (
+            <User size={40} className="text-[#007DCC]" />
+          )}
         </div>
       </div>
       <h3 className="text-lg font-medium text-slate-800">{member.name}</h3>
       {member.role && (
         <p className="mt-1 text-lg font-medium text-[#007DCC]">{member.role}</p>
       )}
-      
+
       <a
         href={`tel:${member.phone.replace(/\s/g, '').replace(/\//g, '')}`}
         className="flex items-center gap-2 text-lg bg-[#007DCC] text-white hover:bg-[#005a8a] transition-colors px-4 py-2 rounded-md mt-4"
       >
-        <Phone size={24} /> 
+        <Phone size={24} />
         <span className="">{member.phone}</span>
       </a>
     </div>

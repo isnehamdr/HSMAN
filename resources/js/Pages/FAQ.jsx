@@ -54,7 +54,7 @@ export default function FAQ() {
 
       <div className="w-full font-sans bg-white">
         {/* Header */}
-        <section className="px-4 sm:px-10 lg:px-16 pt-32 sm:pt-32 pb-12 sm:pb-16 text-center">
+        <section className="px-4 sm:px-10 lg:px-16 pt-12 sm:pt-24 pb-12 sm:pb-16 text-center">
           <span className="inline-flex items-center gap-2 border border-[#007DCC]/30 bg-[#007DCC]/5 text-[#007DCC] text-xs sm:text-sm font-semibold tracking-[2px] uppercase px-5 py-2 rounded-full mb-6">
             FAQ
           </span>
