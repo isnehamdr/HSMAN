@@ -1,4 +1,5 @@
 import ServiceBanner from "@/MainComponent/ServiceBanner";
+import React, { useEffect, useRef } from "react";
 import {
   Handshake,
   Network,
@@ -10,6 +11,11 @@ import {
   Megaphone,
   Award,
 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -83,41 +89,139 @@ const services = [
 const pointIcons = [Calendar, BookOpen, Users, Megaphone, Award];
 
 export default function Services() {
+  const headerRef = useRef(null);
+  const servicesContainerRef = useRef(null);
+  const serviceRefs = useRef([]);
+  const pointRefs = useRef([]);
+  const ctaRef = useRef(null);
+
+  useEffect(() => {
+    // Header animation - fade in from bottom
+    gsap.fromTo(
+      headerRef.current,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Animate each service section
+    serviceRefs.current.forEach((serviceEl, index) => {
+      if (!serviceEl) return;
+
+      const isEven = index % 2 === 1;
+      const leftContent = serviceEl.querySelector('.service-left');
+      const rightContent = serviceEl.querySelector('.service-right');
+
+      // Left side animation - slide from left or right based on position
+      gsap.fromTo(
+        leftContent,
+        { opacity: 0, x: isEven ? 50 : -50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: serviceEl,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Right side animation - slide from opposite direction
+      gsap.fromTo(
+        rightContent,
+        { opacity: 0, x: isEven ? -50 : 50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: serviceEl,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    // Animate point items with stagger
+    const pointItems = pointRefs.current.filter(el => el !== null);
+    if (pointItems.length > 0) {
+      gsap.fromTo(
+        pointItems,
+        { opacity: 0, scale: 0.9, y: 20 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: servicesContainerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+
+    // CTA section animation - fade in with scale
+    gsap.fromTo(
+      ctaRef.current,
+      { opacity: 0, scale: 0.95 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <div className="w-full font-sans bg-white">
-   
-  <ServiceBanner/>
-
-      {/* Quick nav pills */}
-      {/* <section className="px-4 sm:px-10 lg:px-16 -mt-8 sm:-mt-10 relative z-10">
-        <div className="max-w-7xl mx-auto bg-white border border-gray-100 shadow-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 flex flex-wrap justify-center gap-3">
-          {services.map((service) => (
-            <a
-              key={service.id}
-              href={`#${service.id}`}
-              className="text-xs sm:text-sm font-medium text-gray-600 hover:text-[#007DCC] hover:bg-[#007DCC]/5 px-4 py-2 rounded-full transition-colors"
-            >
-              {service.title}
-            </a>
-          ))}
-        </div>
-      </section> */}
+      <ServiceBanner />
 
       {/* Services list */}
       <section className="px-4 sm:px-10 lg:px-16 py-20 sm:py-28">
-        <div className="max-w-7xl mx-auto flex flex-col gap-20 sm:gap-28">
+        <div ref={servicesContainerRef} className="max-w-7xl mx-auto flex flex-col gap-20 sm:gap-28">
           {services.map((service, index) => {
             const Icon = service.icon;
             const isEven = index % 2 === 1;
+            
             return (
               <div
+                ref={(el) => (serviceRefs.current[index] = el)}
                 id={service.id}
                 key={service.id}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start scroll-mt-24"
               >
                 {/* Left: number + icon + title */}
                 <div
-                  className={`lg:col-span-4 flex flex-col gap-6 ${
+                  className={`service-left lg:col-span-4 flex flex-col gap-6 ${
                     isEven ? "lg:order-2" : ""
                   }`}
                 >
@@ -139,7 +243,7 @@ export default function Services() {
 
                 {/* Right: description + points */}
                 <div
-                  className={`lg:col-span-8 flex flex-col gap-8 ${
+                  className={`service-right lg:col-span-8 flex flex-col gap-8 ${
                     isEven ? "lg:order-1" : ""
                   }`}
                 >
@@ -150,9 +254,12 @@ export default function Services() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {service.points.map((point, i) => {
                       const PointIcon = pointIcons[i % pointIcons.length];
+                      const pointIndex = index * service.points.length + i;
+                      
                       return (
                         <div
                           key={point}
+                          ref={(el) => (pointRefs.current[pointIndex] = el)}
                           className="flex items-start gap-3 bg-gray-50 hover:bg-[#007DCC]/5 rounded-xl px-4 py-4 transition-colors"
                         >
                           <span className="w-8 h-8 rounded-full bg-[#007DCC]/10 flex items-center justify-center shrink-0 mt-0.5">
@@ -173,7 +280,10 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="px-4 sm:px-10 lg:px-16 pb-20 sm:pb-28">
+      <section
+        ref={ctaRef}
+        className="px-4 sm:px-10 lg:px-16 pb-20 sm:pb-28"
+      >
         <div className="max-w-7xl mx-auto bg-[#007DCC] rounded-2xl px-6 sm:px-12 py-12 sm:py-16 flex flex-col sm:flex-row items-center justify-between gap-8 text-center sm:text-left">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white max-w-xl">
             Ready to grow with Nepal's hospitality network?

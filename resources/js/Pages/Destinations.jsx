@@ -17,7 +17,7 @@ const destinations = [
     slug: "boudhanath-stupa",
     location: "Kathmandu",
     image:
-      "/images/img7.jpeg",
+      "/images/img7.png",
     description:
       "One of the largest spherical stupas in the world, Boudhanath is a major center of Tibetan Buddhism. Its watchful eyes and colorful prayer flags make it one of Kathmandu's most photographed landmarks.",
   },
@@ -26,7 +26,7 @@ const destinations = [
     slug: "phewa-lake-pokhara",
     location: "Pokhara",
     image:
-      "/images/img1.jpeg",
+      "/images/img1.png",
     description:
       "Nepal's second largest lake, framed by the snow-capped Annapurna range, Phewa Lake is the heart of Pokhara. Rent a boat, visit Tal Barahi Temple on the island, or simply relax at a lakeside cafe.",
   },
