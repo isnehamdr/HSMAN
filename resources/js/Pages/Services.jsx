@@ -96,6 +96,11 @@ export default function Services() {
   const ctaRef = useRef(null);
 
   useEffect(() => {
+    // Keep the horizontal slide distance small on mobile so left/right
+    // content never gets pushed past the viewport edge (horizontal overflow).
+    const isSmallScreen = window.innerWidth < 640;
+    const xOffset = isSmallScreen ? 20 : 50;
+
     // Header animation - fade in from bottom
     gsap.fromTo(
       headerRef.current,
@@ -121,39 +126,42 @@ export default function Services() {
       const leftContent = serviceEl.querySelector('.service-left');
       const rightContent = serviceEl.querySelector('.service-right');
 
+      // On small screens, left/right stack vertically anyway, so skip the
+      // horizontal slide entirely there and just fade+rise in instead.
+      const leftFrom = isSmallScreen
+        ? { opacity: 0, y: 24 }
+        : { opacity: 0, x: isEven ? xOffset : -xOffset };
+      const rightFrom = isSmallScreen
+        ? { opacity: 0, y: 24 }
+        : { opacity: 0, x: isEven ? -xOffset : xOffset };
+
       // Left side animation - slide from left or right based on position
-      gsap.fromTo(
-        leftContent,
-        { opacity: 0, x: isEven ? 50 : -50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: serviceEl,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      gsap.fromTo(leftContent, leftFrom, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: serviceEl,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
 
       // Right side animation - slide from opposite direction
-      gsap.fromTo(
-        rightContent,
-        { opacity: 0, x: isEven ? -50 : 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: serviceEl,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      gsap.fromTo(rightContent, rightFrom, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: serviceEl,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
 
     // Animate point items with stagger
@@ -202,7 +210,9 @@ export default function Services() {
   }, []);
 
   return (
-    <div className="w-full font-sans bg-white">
+    // overflow-x-hidden clips any transient horizontal offset from the
+    // x-axis GSAP tweens above so small screens never get horizontal scroll
+    <div className="w-full font-sans bg-white overflow-x-hidden">
       <ServiceBanner />
 
       {/* Services list */}

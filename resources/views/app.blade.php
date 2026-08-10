@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'HOSPITALITY SALES & MARKETING ASSOCIATION NEPAL | kathmandu') }}</title>
+        <title inertia>{{ config('app.name', 'Hospitality Sales & Marketing Association Nepal | kathmandu') }}</title>
         <link rel="icon" href='/images/logo2.jpeg'type='image/jpeg'>
 
         <!-- Fonts -->

@@ -301,12 +301,20 @@ export default function About() {
   const paraRef = useRef(null);
   const ctaRef = useRef(null);
   const dividerRef = useRef(null);
-  const statRefs = useRef([]);
-  statRefs.current = [];
+  const statBoxRefs = useRef([]);
+  const statNumberRefs = useRef([]);
+  statBoxRefs.current = [];
+  statNumberRefs.current = [];
 
-  const addStatRef = (el) => {
-    if (el && !statRefs.current.includes(el)) {
-      statRefs.current.push(el);
+  const addStatBoxRef = (el) => {
+    if (el && !statBoxRefs.current.includes(el)) {
+      statBoxRefs.current.push(el);
+    }
+  };
+
+  const addStatNumberRef = (el) => {
+    if (el && !statNumberRefs.current.includes(el)) {
+      statNumberRefs.current.push(el);
     }
   };
 
@@ -317,7 +325,6 @@ export default function About() {
       gsap.set(paraRef.current, { opacity: 0, y: 24 });
       gsap.set(ctaRef.current, { opacity: 0, y: 24 });
       gsap.set(dividerRef.current, { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(statRefs.current, { opacity: 0, y: 20 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -333,18 +340,7 @@ export default function About() {
         .to(headingRef.current, { opacity: 1, y: 0 }, "-=0.45")
         .to(paraRef.current, { opacity: 1, y: 0 }, "-=0.4")
         .to(ctaRef.current, { opacity: 1, y: 0 }, "-=0.4")
-        .to(dividerRef.current, { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, "-=0.2")
-        .to(
-          statRefs.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.12,
-            ease: "back.out(1.6)",
-          },
-          "-=0.3"
-        );
+        .to(dividerRef.current, { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, "-=0.2");
 
       const arrow = ctaRef.current?.querySelector("span");
       if (arrow) {
@@ -356,16 +352,66 @@ export default function About() {
           ease: "sine.inOut",
         });
       }
+
+      // Stats row: fade/scale in boxes, then count up numbers
+      gsap.set(statBoxRefs.current, { opacity: 0, y: 20, scale: 0.9 });
+
+      const statsTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: statBoxRefs.current[0]?.closest("div.grid") || sectionRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      statsTl.to(statBoxRefs.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: "back.out(1.6)",
+      });
+
+      statNumberRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const target = parseFloat(el.dataset.target || "0");
+        const suffix = el.dataset.suffix || "";
+        const counter = { val: 0 };
+
+        statsTl.to(
+          counter,
+          {
+            val: target,
+            duration: 1.4,
+            ease: "power2.out",
+            onUpdate: () => {
+              el.textContent = Math.floor(counter.val) + suffix;
+            },
+            onComplete: () => {
+              el.textContent = target + suffix;
+            },
+          },
+          i === 0 ? "-=0.2" : "<0.1"
+        );
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  const stats = [
+    { icon: "/images/one.png", alt: "Members icon", target: 300, suffix: "+", label: "Members" },
+    { icon: "/images/two.png", alt: "Member Committee icon", target: 11, suffix: "", label: "Member Committee" },
+    { icon: "/images/three.png", alt: "Industry Representatives icon", target: 60, suffix: "+", label: "Industry Representatives" },
+    { icon: "/images/four.png", alt: "Province Representatives icon", target: 7, suffix: "", label: "Province Representatives" },
+  ];
+
   return (
-    <section ref={sectionRef} className="w-full px-4 sm:px-10 lg:px-0 py-16 sm:py-0 sm:pt-24">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="w-full px-0 py-10 lg:py-20 sm:px-10 lg:px-0 sm:py-0 sm:pt-24 lg:mb-20">
+      <div className="px-4 mx-auto max-w-7xl lg:px-0">
         {/* Top row: badge + heading */}
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 px-0 lg:px-0">
+        <div className="flex flex-col items-center gap-8 px-0 lg:flex-row lg:gap-12 lg:px-0">
           <div className="flex items-center sm:items-start">
             <span
               ref={badgeRef}
@@ -386,7 +432,7 @@ export default function About() {
             </span>
           </div>
 
-          <div className="hidden lg:block w-px bg-gray-200 self-stretch" />
+          <div className="self-stretch hidden w-px bg-gray-200 lg:block" />
 
           {/* Right: heading, paragraph, CTA */}
           <div className="flex-1">
@@ -404,7 +450,7 @@ export default function About() {
 
             <p
               ref={paraRef}
-              className="text-gray-500 text-sm sm:text-lg leading-relaxed mt-6 max-w-5xl"
+              className="max-w-5xl mt-6 text-sm leading-relaxed text-gray-500 sm:text-lg"
             >
               We are committed to building a stronger, more connected
               hospitality community through professional development,
@@ -423,82 +469,58 @@ export default function About() {
             </a>
           </div>
         </div>
-
-    
       </div>
 
-    {/* Stats row: full width, rounded-3xl top */}
-<div className="w-full bg-[#007DCC] text-white mt-10 sm:mt-12 pt-24 pb-16 sm:pb-20">
-  <div className="max-w-3xl mx-auto text-center px-6 mb-12 sm:mb-16">
-    <h3 className="text-2xl sm:text-3xl font-semibold">
-      Our Impact Across Nepal
-    </h3>
-    <p className="text-white/80 text-sm sm:text-base mt-3">
-      A growing network of hospitality and tourism professionals driving
-      collaboration and industry growth nationwide.
-    </p>
-  </div>
+      {/* Stats row: full width, rounded-3xl top */}
+      <div className="w-full bg-[#007DCC] text-white mt-10 sm:mt-12 pt-8 lg:pt-16 pb-8 sm:pb-20 relative">
+        <div
+          className="
+            absolute inset-0
+            opacity-10
+            bg-[linear-gradient(135deg,transparent_49%,rgba(255,255,255,0.6)_50%,transparent_51%)]
+            [background-size:40px_40px]
+          "
+        />
 
-  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-6 px-6 sm:px-12 justify-items-stretch text-center">
+        <div className="flex flex-col px-6 mx-auto mb-12 lg:px-12 text-start sm:mb-16 lg:flex-row lg:justify-between">
+          <h3 className="text-3xl font-semibold sm:text-5xl lg:max-w-lg">
+            Our Impact Across Nepal
+          </h3>
+          <p className="max-w-lg mt-3 text-sm text-white/80 sm:text-base">
+            A growing network of hospitality and tourism professionals driving
+            collaboration and industry growth nationwide.
+          </p>
+        </div>
 
-    <div className="bg-white rounded-3xl p-8">
-      <div className="flex flex-col items-center justify-center">
-        <div ref={addStatRef}>
-          <img
-            src="/images/one.png"
-            alt="Members icon"
-            className="w-12 h-12 mx-auto mb-4"
-          />
-          <p className="text-4xl sm:text-5xl font-bold text-gray-700">300+</p>
-          <p className="text-gray-500 text-sm sm:text-base mt-2">Members</p>
+        <div className="grid grid-cols-2 gap-4 px-4 text-center lg:-mb-44 sm:grid-cols-4 sm:gap-6 sm:px-12 justify-items-stretch">
+          {stats.map((stat, idx) => (
+            <div
+              key={idx}
+              ref={addStatBoxRef}
+              className="p-4 lg:p-8 bg-white rounded-2xl sm:rounded-3xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+            >
+              <div className="flex flex-col items-center justify-center">
+                <img
+                  src={stat.icon}
+                  alt={stat.alt}
+                  className="w-10 h-10 mx-auto mb-3 sm:w-12 sm:h-12 sm:mb-4"
+                />
+                <p
+                  ref={addStatNumberRef}
+                  data-target={stat.target}
+                  data-suffix={stat.suffix}
+                  className="text-3xl font-bold text-gray-700 sm:text-4xl lg:text-5xl"
+                >
+                  0{stat.suffix}
+                </p>
+                <p className="mt-2 text-xs text-gray-500 sm:text-sm lg:text-base">
+                  {stat.label}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-
-    <div className="bg-white rounded-3xl p-8">
-      <div className="flex flex-col items-center justify-center">
-        <div ref={addStatRef}>
-          <img
-            src="/images/two.png"
-            alt="Member Committee icon"
-            className="w-12 h-12 mx-auto mb-4"
-          />
-          <p className="text-4xl sm:text-5xl font-bold text-gray-700">11</p>
-          <p className="text-gray-500 text-sm sm:text-base mt-2">Member Committee</p>
-        </div>
-      </div>
-    </div>
-
-    <div className="bg-white rounded-3xl p-8">
-      <div className="flex flex-col items-center justify-center">
-        <div ref={addStatRef}>
-          <img
-            src="/images/three.png"
-            alt="Industry Representatives icon"
-            className="w-12 h-12 mx-auto mb-4"
-          />
-          <p className="text-4xl sm:text-5xl font-bold text-gray-700">60+</p>
-          <p className="text-gray-500 text-sm sm:text-base mt-2">Industry Representatives</p>
-        </div>
-      </div>
-    </div>
-
-    <div className="bg-white rounded-3xl p-8">
-      <div className="flex flex-col items-center justify-center">
-        <div ref={addStatRef}>
-          <img
-            src="/images/four.png"
-            alt="Province Representatives icon"
-            className="w-12 h-12 mx-auto mb-4"
-          />
-          <p className="text-4xl sm:text-5xl font-bold text-gray-700">7</p>
-          <p className="text-gray-500 text-sm sm:text-base mt-2">Province Representatives</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
     </section>
   );
 }

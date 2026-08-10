@@ -408,7 +408,6 @@
 //   );
 // }
 
-
 import React, { useState, useEffect, useRef } from "react";
 import { Phone, Mail, MapPin, Send, CheckCircle, Loader2 } from "lucide-react";
 import ContactBanner from "@/MainComponent/ContactBanner";
@@ -492,6 +491,11 @@ export default function Contact() {
 
   // GSAP Animations
   useEffect(() => {
+    // Keep horizontal slide distances small (or off) on mobile so the form
+    // and side panel never get pushed past the viewport edge.
+    const isSmallScreen = window.innerWidth < 640;
+    const xOffset = isSmallScreen ? 0 : 50;
+
     // Header animation - fade in from bottom
     gsap.fromTo(
       headerRef.current,
@@ -509,7 +513,7 @@ export default function Contact() {
       }
     );
 
-    // Contact cards animation - stagger with scale and fade
+    // Contact cards animation - stagger with scale and fade (vertical only, safe)
     gsap.fromTo(
       cardsRef.current,
       { opacity: 0, scale: 0.9, y: 30 },
@@ -528,13 +532,14 @@ export default function Contact() {
       }
     );
 
-    // Form animation - slide in from left
+    // Form animation - slide in from left (falls back to fade+rise on mobile)
     gsap.fromTo(
       formRef.current,
-      { opacity: 0, x: -50 },
+      isSmallScreen ? { opacity: 0, y: 24 } : { opacity: 0, x: -xOffset },
       {
         opacity: 1,
         x: 0,
+        y: 0,
         duration: 0.7,
         ease: "power2.out",
         scrollTrigger: {
@@ -545,13 +550,14 @@ export default function Contact() {
       }
     );
 
-    // Side panel animation - slide in from right
+    // Side panel animation - slide in from right (falls back to fade+rise on mobile)
     gsap.fromTo(
       sidePanelRef.current,
-      { opacity: 0, x: 50 },
+      isSmallScreen ? { opacity: 0, y: 24 } : { opacity: 0, x: xOffset },
       {
         opacity: 1,
         x: 0,
+        y: 0,
         duration: 0.7,
         ease: "power2.out",
         scrollTrigger: {
@@ -635,7 +641,9 @@ export default function Contact() {
     <>
       <ContactBanner />
 
-      <div className="w-full font-sans bg-white min-h-screen">
+      {/* overflow-x-hidden clips any transient horizontal offset from the
+          x-axis GSAP tweens above so small screens never get horizontal scroll */}
+      <div className="w-full font-sans bg-white min-h-screen overflow-x-hidden">
         {/* Toast Notification */}
         {showToast && (
           <div className="fixed top-4 right-4 z-50 max-w-sm w-full bg-green-50 border border-green-200 rounded-lg shadow-lg p-4 animate-in slide-in-from-top-2">
@@ -844,7 +852,6 @@ export default function Contact() {
                 className="rounded-2xl p-6 sm:p-7 lg:p-8 text-white relative overflow-hidden"
                 style={{
                   backgroundImage: 'linear-gradient(135deg, #007DCC 0%, #005a94 100%)',
-                  backgroundAttachment: 'fixed',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}

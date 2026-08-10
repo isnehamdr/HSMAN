@@ -32,7 +32,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import MainLayout from '@/Layouts/MainLayout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'HOSPITALITY SALES & MARKETING ASSOCIATION NEPAL | kathmandu';
+const appName = import.meta.env.VITE_APP_NAME || 'Hospitality Sales & Marketing Association Nepal | kathmandu';
 
 createInertiaApp({
     title: (title) => `${title}  ${appName}`,
