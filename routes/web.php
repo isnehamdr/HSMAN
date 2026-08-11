@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HeroSectionController;
 use Inertia\Inertia;
 
 // Route::get('/', function () {
@@ -22,6 +23,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+ Route::post('/ourhero', [HeroSectionController::class, 'store'])->name('ourhero.store');
+ Route::get('/ourhero', [HeroSectionController::class, 'index'])->name('ourhero.index');
+Route::post('/ourhero/{heroSection}', [HeroSectionController::class, 'update'])->name('ourhero.update');
+    Route::delete('/ourhero/{heroSection}', [HeroSectionController::class, 'destroy'])->name('ourhero.destroy');
+  
+
+    Route::get('/hero-section', function () {
+        return Inertia::render('AdminPages/HeroSection');
+    });
+
+
 });
 
 Route::get('/', function () {
