@@ -1,5 +1,6 @@
 import React from "react";
 import { Clock, MapPin, ArrowLeft, Share2, CalendarDays } from "lucide-react";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // In a real app this would come from routing params + a data source / API.
 // For now it's seeded with one example event; swap `event` for the matched
@@ -32,6 +33,8 @@ const event = {
 
 export default function EventDetails() {
   return (
+
+    <Wrapper>
     <div className="min-h-screen bg-white">
       {/* Hero image */}
       <section className="relative w-full h-[45vh] sm:h-[55vh] min-h-[320px] overflow-hidden">
@@ -171,5 +174,6 @@ export default function EventDetails() {
         </aside>
       </section>
     </div>
+    </Wrapper>
   );
 }

@@ -413,6 +413,7 @@ import { Phone, Mail, MapPin, Send, CheckCircle, Loader2 } from "lucide-react";
 import ContactBanner from "@/MainComponent/ContactBanner";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -639,6 +640,8 @@ export default function Contact() {
 
   return (
     <>
+
+    <Wrapper>
       <ContactBanner />
 
       {/* overflow-x-hidden clips any transient horizontal offset from the
@@ -934,6 +937,7 @@ export default function Contact() {
           </div>
         </section>
       </div>
+      </Wrapper>
     </>
   );
 }

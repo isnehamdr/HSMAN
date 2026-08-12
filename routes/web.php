@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberCategoryController;
 use Inertia\Inertia;
 
 // Route::get('/', function () {
@@ -25,15 +27,33 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
- Route::post('/ourhero', [HeroSectionController::class, 'store'])->name('ourhero.store');
- Route::get('/ourhero', [HeroSectionController::class, 'index'])->name('ourhero.index');
-Route::post('/ourhero/{heroSection}', [HeroSectionController::class, 'update'])->name('ourhero.update');
-    Route::delete('/ourhero/{heroSection}', [HeroSectionController::class, 'destroy'])->name('ourhero.destroy');
+// Make sure these are not inside a route group that might affect them
+Route::get('/ourhero', [HeroSectionController::class, 'index'])->name('ourhero.index');
+Route::post('/ourhero', [HeroSectionController::class, 'store'])->name('ourhero.store');
+Route::put('/ourhero/{id}', [HeroSectionController::class, 'update'])->name('ourhero.update');
+Route::delete('/ourhero/{id}', [HeroSectionController::class, 'destroy'])->name('ourhero.destroy');
+
+
+Route::get('/ourmember', [MemberController::class, 'index'])->name('ourmember.index');
+Route::post('/ourmember', [MemberController::class, 'store'])->name('ourmember.store');
+Route::post('/ourmember/{member}', [MemberController::class, 'update'])->name('ourmember.update');
+Route::delete('/ourmember/{member}', [MemberController::class, 'destroy'])->name('ourmember.destroy');
+
+
+
+
   
 
     Route::get('/hero-section', function () {
         return Inertia::render('AdminPages/HeroSection');
     });
+
+    
+Route::get('/member', function () {
+    return Inertia::render('AdminPages/Members');
+});
+
+
 
 
 });

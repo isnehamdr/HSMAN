@@ -124,6 +124,7 @@ import { X } from "lucide-react";
 import GalleryBanner from "@/MainComponent/GalleryBanner";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -284,6 +285,7 @@ export default function Gallery() {
 
   return (
     <>
+    <Wrapper>
       <GalleryBanner />
 
       <div className="w-full bg-white">
@@ -384,6 +386,7 @@ export default function Gallery() {
           </div>
         )}
       </div>
+      </Wrapper>
     </>
   );
 }

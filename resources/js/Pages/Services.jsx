@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -210,8 +211,7 @@ export default function Services() {
   }, []);
 
   return (
-    // overflow-x-hidden clips any transient horizontal offset from the
-    // x-axis GSAP tweens above so small screens never get horizontal scroll
+   <Wrapper>
     <div className="w-full font-sans bg-white overflow-x-hidden">
       <ServiceBanner />
 
@@ -307,5 +307,6 @@ export default function Services() {
         </div>
       </section>
     </div>
+    </Wrapper>
   );
 }

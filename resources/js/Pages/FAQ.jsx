@@ -169,6 +169,7 @@ import { Plus } from "lucide-react";
 import FAQBanner from "@/MainComponent/FAQBanner";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -305,6 +306,8 @@ export default function FAQ() {
 
   return (
     <>
+
+    <Wrapper>
       <FAQBanner />
 
       <div className="w-full font-sans bg-white">
@@ -428,6 +431,7 @@ export default function FAQ() {
           </div>
         </section>
       </div>
+      </Wrapper>
     </>
   );
 }

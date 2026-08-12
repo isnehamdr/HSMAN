@@ -1,5 +1,6 @@
 'use client'
 
+import Wrapper from '@/FrontWrapper/Wrapper'
 import About from '@/MainComponent/About'
 import Blog from '@/MainComponent/Blog'
 import Causes from '@/MainComponent/Causes'
@@ -13,6 +14,7 @@ import React from 'react'
 const HomePage = () => {
   return (
     <>
+    <Wrapper>
       <Hero />
         <About />
         <Services />
@@ -21,7 +23,7 @@ const HomePage = () => {
         <Testimonial />
         <Blog />
         <CtaBanner />
-     
+     </Wrapper>
     </>
   )
 }

@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
             $table->string('image_path');
-            $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->integer('order')->nullable()->unique();
+            $table->enum('is_active', ['draft', 'published'])->default('draft');
             $table->timestamps();
         });
     }

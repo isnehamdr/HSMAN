@@ -142,6 +142,7 @@ import Services from "@/MainComponent/Services";
 import MemberBanner from "@/MainComponent/MemberBanner";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -309,6 +310,8 @@ const Member = () => {
 
   return (
     <>
+
+    <Wrapper>
     <MemberBanner />
     <div ref={sectionRef} className="min-h-screen bg-white px-4 py-16 sm:px-8 lg:px-0">
       {/* Services Component - Rendered at the top */}
@@ -352,6 +355,7 @@ const Member = () => {
         </div>
       </div>
     </div>
+    </Wrapper>
     </>
   );
 };

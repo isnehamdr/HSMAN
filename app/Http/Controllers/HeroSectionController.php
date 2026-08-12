@@ -8,68 +8,82 @@ use Illuminate\Support\Facades\Storage;
 
 class HeroSectionController extends Controller
 {
-   public function index()
-{
-    $heroSections = HeroSection::orderBy('order')->get();
+    public function index()
+    {
+        $heroes = HeroSection::orderBy('order')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $heroes
+        ]);
+    }
 
-    \Log::info('HeroSection count: ' . $heroSections->count());
-
-    return inertia('AdminPages/HeroSection', [
-        'heroSections' => $heroSections,
-    ]);
-}
     public function store(Request $request)
     {
+        // Your store logic
         $validated = $request->validate([
-            'image'     => ['required', 'image', 'max:2048'],
-            'order'     => ['nullable', 'integer'],
-            'is_active' => ['nullable', 'boolean'],
+            'image' => 'required|image|max:2048',
+            'order' => 'required|integer',
+            'is_active' => 'boolean'
         ]);
 
-        $imagePath = $request->file('image')->store('hero-sections', 'public');
-
-        HeroSection::create([
-            'image_path' => $imagePath,
-            'order'      => $validated['order'] ?? 0,
-            'is_active'  => $validated['is_active'] ?? true,
+        $path = $request->file('image')->store('heroes', 'public');
+        
+        $hero = HeroSection::create([
+            'image_path' => $path,
+            'order' => $request->order,
+            'is_active' => $request->is_active ?? true
         ]);
 
-        return redirect()->back()->with('success', 'Hero slide added successfully');
+        return response()->json([
+            'success' => true,
+            'data' => $hero
+        ]);
     }
 
-    public function update(Request $request, HeroSection $heroSection)
+    public function update(Request $request, $id)
     {
+        // Your update logic
+        $hero = HeroSection::findOrFail($id);
+        
         $validated = $request->validate([
-            'image'     => ['nullable', 'image', 'max:2048'],
-            'order'     => ['nullable', 'integer'],
-            'is_active' => ['nullable', 'boolean'],
+            'order' => 'sometimes|integer',
+            'is_active' => 'sometimes|boolean',
+            'image' => 'nullable|image|max:2048'
         ]);
-
-        $data = [
-            'order'     => $validated['order'] ?? $heroSection->order,
-            'is_active' => $validated['is_active'] ?? $heroSection->is_active,
-        ];
 
         if ($request->hasFile('image')) {
-            if ($heroSection->image_path) {
-                Storage::disk('public')->delete($heroSection->image_path);
+            // Delete old image
+            if ($hero->image_path) {
+                Storage::disk('public')->delete($hero->image_path);
             }
-            $data['image_path'] = $request->file('image')->store('hero-sections', 'public');
+            $path = $request->file('image')->store('heroes', 'public');
+            $hero->image_path = $path;
         }
 
-        $heroSection->update($data);
+        $hero->order = $request->order ?? $hero->order;
+        $hero->is_active = $request->is_active ?? $hero->is_active;
+        $hero->save();
 
-        return redirect()->back()->with('success', 'Hero slide updated successfully');
+        return response()->json([
+            'success' => true,
+            'data' => $hero
+        ]);
     }
 
-    public function destroy(HeroSection $heroSection)
+    public function destroy($id)
     {
-        if ($heroSection->image_path) {
-            Storage::disk('public')->delete($heroSection->image_path);
+        $hero = HeroSection::findOrFail($id);
+        
+        // Delete the image file
+        if ($hero->image_path) {
+            Storage::disk('public')->delete($hero->image_path);
         }
+        
+        $hero->delete();
 
-        $heroSection->delete();
-
-        return redirect()->back()->with('success', 'Hero slide deleted successfully');
+        return response()->json([
+            'success' => true,
+            'message' => 'Hero section deleted successfully'
+        ]);
     }
 }

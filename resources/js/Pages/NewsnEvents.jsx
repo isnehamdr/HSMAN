@@ -92,6 +92,7 @@ import { Link } from '@inertiajs/react'
 import { Clock, MapPin, ArrowRight, CalendarCheck, CalendarClock } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Wrapper from '@/FrontWrapper/Wrapper'
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
@@ -229,6 +230,8 @@ const NewsnEvents = ({ events }) => {
 
   return (
     <>
+
+    <Wrapper>
       <EventBanner />
       <div className="min-h-screen bg-white px-4 py-16 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="mx-auto max-w-7xl">
@@ -294,6 +297,7 @@ const NewsnEvents = ({ events }) => {
           </div>
         </div>
       </div>
+      </Wrapper>
     </>
   )
 }

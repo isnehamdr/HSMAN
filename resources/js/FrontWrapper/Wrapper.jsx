@@ -4,7 +4,7 @@ import Navbar from "@/MainComponent/Navabar";
 import { useState, useEffect } from "react";
 
 
-export default function MainLayout({ children }) {
+export default function Wrapper({ children }) {
   return (
     <div className="">
       {/* Navbar - fixed at top */}

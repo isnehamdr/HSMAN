@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import AdminNavbar from '@/AdminWrapper/AdminNavbar';
-import AdminSidebar from '@/AdminWrapper/AdminSidebar';
 
-export default function AdminLayout({ header, children }) {
+import { useState, useEffect } from 'react';
+import AdminNavbar from './AdminNavbar';
+import AdminSidebar from './AdminSidebar';
+
+export default function AdminWrapper({ header, children }) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -33,7 +34,7 @@ export default function AdminLayout({ header, children }) {
                 sidebarOpen={sidebarOpen}
                 isMobile={isMobile}
             />
-            <AdminSidebar 
+            <AdminSidebar
                 isOpen={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
             />

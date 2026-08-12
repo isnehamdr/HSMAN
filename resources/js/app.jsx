@@ -1,28 +1,28 @@
-// // import '../css/app.css';
-// // import './bootstrap';
+ import '../css/app.css';
+ import './bootstrap';
 
-// // import { createInertiaApp } from '@inertiajs/react';
-// // import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-// // import { createRoot } from 'react-dom/client';
+ import { createInertiaApp } from '@inertiajs/react';
+ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+ import { createRoot } from 'react-dom/client';
 
-// // const appName = import.meta.env.VITE_APP_NAME || 'HOSPITALITY SALES & MARKETING ASSOCIATION NEPAL | kathmandu';
+ const appName = import.meta.env.VITE_APP_NAME || 'HOSPITALITY SALES & MARKETING ASSOCIATION NEPAL | kathmandu';
 
-// // createInertiaApp({
-// //     title: (title) => `${title}  ${appName}`,
-// //     resolve: (name) =>
-// //         resolvePageComponent(
-// //             `./Pages/${name}.jsx`,
-// //             import.meta.glob('./Pages/**/*.jsx'),
-// //         ),
-// //     setup({ el, App, props }) {
-// //         const root = createRoot(el);
+ createInertiaApp({
+     title: (title) => `${title}  ${appName}`,
+     resolve: (name) =>
+         resolvePageComponent(
+             `./Pages/${name}.jsx`,
+             import.meta.glob('./Pages/**/*.jsx'),
+         ),
+     setup({ el, App, props }) {
+         const root = createRoot(el);
 
-// //         root.render(<App {...props} />);
-// //     },
-// //     progress: {
-// //         color: '#4B5563',
-// //     },
-// // });
+         root.render(<App {...props} />);
+     },
+     progress: {
+         color: '#4B5563',
+     },
+ });
 
 // import '../css/app.css';
 // import './bootstrap';
@@ -57,38 +57,38 @@
 //     },
 // });
 
-import '../css/app.css';
-import './bootstrap';
+// import '../css/app.css';
+// import './bootstrap';
 
-import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { createRoot } from 'react-dom/client';
-import MainLayout from '@/Layouts/MainLayout';
-import AdminLayout from '@/Layouts/AdminLayout';
+// import { createInertiaApp } from '@inertiajs/react';
+// import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+// import { createRoot } from 'react-dom/client';
+// import MainLayout from '@/Layouts/MainLayout';
+// import AdminLayout from '@/Layouts/AdminLayout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Hospitality Sales & Marketing Association Nepal | kathmandu';
+// const appName = import.meta.env.VITE_APP_NAME || 'Hospitality Sales & Marketing Association Nepal | kathmandu';
 
-createInertiaApp({
-    title: (title) => `${title}  ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.jsx`,
-            import.meta.glob('./Pages/**/*.jsx'),
-        ).then((page) => {
-            if (!page.default.layout) {
-                if (name.startsWith('Admin/')) {
-                    page.default.layout = (p) => <AdminLayout>{p}</AdminLayout>;
-                } else {
-                    page.default.layout = (p) => <MainLayout>{p}</MainLayout>;
-                }
-            }
-            return page;
-        }),
-    setup({ el, App, props }) {
-        const root = createRoot(el);
-        root.render(<App {...props} />);
-    },
-    progress: {
-        color: '#4B5563',
-    },
-});
+// createInertiaApp({
+//     title: (title) => `${title}  ${appName}`,
+//     resolve: (name) =>
+//         resolvePageComponent(
+//             `./Pages/${name}.jsx`,
+//             import.meta.glob('./Pages/**/*.jsx'),
+//         ).then((page) => {
+//             if (!page.default.layout) {
+//                 if (name.startsWith('Admin/')) {
+//                     page.default.layout = (p) => <AdminLayout>{p}</AdminLayout>;
+//                 } else {
+//                     page.default.layout = (p) => <MainLayout>{p}</MainLayout>;
+//                 }
+//             }
+//             return page;
+//         }),
+//     setup({ el, App, props }) {
+//         const root = createRoot(el);
+//         root.render(<App {...props} />);
+//     },
+//     progress: {
+//         color: '#4B5563',
+//     },
+// });

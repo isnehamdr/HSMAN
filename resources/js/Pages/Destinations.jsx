@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { MapPin } from "lucide-react";
 import GalleryBanner from "@/MainComponent/GalleryBanner";
+import Wrapper from "@/FrontWrapper/Wrapper";
 
 const destinations = [
   {
@@ -94,6 +95,8 @@ export default function Destinations() {
 
   return (
     <>
+
+    <Wrapper>
     <GalleryBanner/>
     <div className="w-full font-sans bg-white">
       {/* Header */}
@@ -170,6 +173,7 @@ export default function Destinations() {
         </div>
       </section>
     </div>
+    </Wrapper>
     </>
   );
 }

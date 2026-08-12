@@ -26,7 +26,8 @@
 // }
 
 
-import AdminLayout from '@/Layouts/AdminLayout';
+
+import AdminWrapper from '@/AdminComponent/AdminWrapper';
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
@@ -127,6 +128,7 @@ function Dashboard() {
 
     return (
         <>
+        <AdminWrapper>
             <Head title="Dashboard" />
 
             {/* Welcome Section */}
@@ -138,19 +140,7 @@ function Dashboard() {
                             Here's what's happening with your website today.
                         </p>
                     </div>
-                    <div className="flex gap-3">
-                        <Link
-                            href="#"
-                            className="rounded-lg bg-white/20 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/30"
-                        >
-                            <span className="flex items-center gap-2">
-                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                </svg>
-                                Add New
-                            </span>
-                        </Link>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -254,11 +244,11 @@ function Dashboard() {
                 </div>
             </div>
 
+</AdminWrapper>
             
         </>
     );
 }
 
-Dashboard.layout = (page) => <AdminLayout children={page}>{page}</AdminLayout>;
 
 export default Dashboard;

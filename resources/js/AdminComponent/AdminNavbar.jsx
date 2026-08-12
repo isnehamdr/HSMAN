@@ -62,7 +62,7 @@ export default function AdminNavbar({ onToggleSidebar, sidebarOpen }) {
                         )}
                     </button>
 
-                    <Link href="/dashboard" className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2">
                         <img
                             src="/images/logo2.jpeg"
                             alt="Logo"

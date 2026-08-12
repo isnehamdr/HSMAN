@@ -1,3 +1,4 @@
+import Wrapper from '@/FrontWrapper/Wrapper';
 import AgencyBanner from '@/MainComponent/AgencyBanner';
 import React from 'react';
 
@@ -10,6 +11,8 @@ const Agencies = () => {
 
   return (
     <>
+<Wrapper>
+
       <AgencyBanner />
       
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -72,6 +75,7 @@ const Agencies = () => {
           </div>
         </div>
       </div>
+      </Wrapper>
     </>
   );
 };
