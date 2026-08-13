@@ -5,7 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\MemberCategoryController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\FaqController;
 use Inertia\Inertia;
 
 // Route::get('/', function () {
@@ -40,8 +42,27 @@ Route::post('/ourmember/{member}', [MemberController::class, 'update'])->name('o
 Route::delete('/ourmember/{member}', [MemberController::class, 'destroy'])->name('ourmember.destroy');
 
 
+Route::get('/ourevents', [EventsController::class, 'index'])->name('ourevents.index');
+Route::post('/ourevents', [EventsController::class, 'store'])->name('ourevents.store');
+Route::post('/ourevents/{event}', [EventsController::class, 'update'])->name('ourevents.update');
+Route::delete('/ourevents/{event}', [EventsController::class, 'destroy'])->name('ourevents.destroy');
 
+Route::get('/ourgallery', [GalleryController::class, 'index'])
+    ->name('ourgallery.index');
 
+Route::post('/ourgallery', [GalleryController::class, 'store'])
+    ->name('ourgallery.store');
+
+Route::post('/ourgallery/{gallery}', [GalleryController::class, 'update'])
+    ->name('ourgallery.update');
+
+Route::delete('/ourgallery/{gallery}', [GalleryController::class, 'destroy'])
+    ->name('ourgallery.destroy');
+
+Route::get('/ourfaq', [FaqController::class, 'index'])->name('ourfaq.index');
+Route::post('/ourfaq', [FaqController::class, 'store'])->name('ourfaq.store');
+Route::put('/ourfaq/{faq}', [FaqController::class, 'update'])->name('ourfaq.update');
+Route::delete('/ourfaq/{faq}', [FaqController::class, 'destroy'])->name('ourfaq.destroy');
   
 
     Route::get('/hero-section', function () {
@@ -53,6 +74,16 @@ Route::get('/member', function () {
     return Inertia::render('AdminPages/Members');
 });
 
+Route::get('/event', function () {
+    return Inertia::render('AdminPages/Events');
+});
+Route::get('/galleries', function () {
+    return Inertia::render('AdminPages/Gallery');
+});
+
+Route::get('/faqs', function () {
+    return Inertia::render('AdminPages/FAQ');
+});
 
 
 
