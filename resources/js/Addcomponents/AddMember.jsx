@@ -2,6 +2,14 @@
 // import React, { useEffect, useState, useCallback, useRef } from 'react'
 // import axios from 'axios';
 
+// // Static category list — keep this in sync with App\Enums\MemberCategory on the backend
+// export const MEMBER_CATEGORIES = [
+//     { value: 'executive_committee', label: 'Executive Committee' },
+//     { value: 'executive_members', label: 'Executive Members' },
+//     { value: 'advisors', label: 'Advisors' },
+    
+// ];
+
 // const AddMember = ({ 
 //     showForm, 
 //     editingmember, 
@@ -11,34 +19,17 @@
 //     handleUpdate 
 // }) => {
 //     const [submitting, setSubmitting] = useState(false);
-//     const [categories, setCategories] = useState([]);
 //     const [memberForm, setmemberForm] = useState({
 //         image: null,
 //         name: '',
 //         position: '',
 //         phone_number: '',
 //         is_active: true,
-//         category_id: '',
+//         category: '',
 //     });
 //     const [preview, setPreview] = useState(null);
 //     const fileInputRef = useRef(null);
 //     const formRef = useRef(null);
-
-//     // Fetch categories once when the form is available
-//     useEffect(() => {
-//         if (!showForm) return;
-
-//         const fetchCategories = async () => {
-//             try {
-//                 const response = await axios.get('/membercategory');
-//                 setCategories(response.data.data || []);
-//             } catch (error) {
-//                 console.log("Error fetching categories", error);
-//             }
-//         };
-
-//         fetchCategories();
-//     }, [showForm]);
 
 //     useEffect(() => {
 //         if (editingmember) {
@@ -48,7 +39,7 @@
 //                 position: editingmember.position ?? '',
 //                 phone_number: editingmember.phone_number ?? '',
 //                 is_active: editingmember.is_active ?? true,
-//                 category_id: editingmember.category_id ?? '',
+//                 category: editingmember.category ?? '',
 //             });
 //             setPreview(
 //                 editingmember.image_path
@@ -62,7 +53,7 @@
 //                 position: '',
 //                 phone_number: '',
 //                 is_active: true,
-//                 category_id: '',
+//                 category: '',
 //             });
 //             setPreview(null);
 //             // Reset file input
@@ -102,7 +93,7 @@
 //         formData.append("position", memberForm.position ?? '');
 //         formData.append("phone_number", memberForm.phone_number ?? '');
 //         formData.append("is_active", memberForm.is_active ? 1 : 0);
-//         formData.append("category_id", memberForm.category_id || '');
+//         formData.append("category", memberForm.category || '');
 
 //         try {
 //             setSubmitting(true);
@@ -120,7 +111,7 @@
 //                 position: '', 
 //                 phone_number: '', 
 //                 is_active: true,
-//                 category_id: '',
+//                 category: '',
 //             });
 //             setPreview(null);
 //             if (fileInputRef.current) {
@@ -245,24 +236,25 @@
 //                         />
 //                     </div>
 
-//                     <div>
-//                         <label className="block text-sm font-medium text-gray-700 mb-1">
-//                             Category
-//                         </label>
-//                         <select
-//                             name="category_id"
-//                             value={memberForm.category_id}
-//                             onChange={handleChange}
-//                             className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-//                         >
-//                             <option value="">Select category</option>
-//                             {categories.map((cat) => (
-//                                 <option key={cat.id} value={cat.id}>
-//                                     {cat.name}
-//                                 </option>
-//                             ))}
-//                         </select>
-//                     </div>
+//                    <div>
+//     <label className="block text-sm font-medium text-gray-700 mb-1">
+//         Category *
+//     </label>
+//     <select
+//         name="category"
+//         value={memberForm.category}
+//         onChange={handleChange}
+//         required
+//         className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+//     >
+//         <option value="">Select category</option>
+//         {MEMBER_CATEGORIES.map((cat) => (
+//             <option key={cat.value} value={cat.value}>
+//                 {cat.label}
+//             </option>
+//         ))}
+//     </select>
+// </div>
 
 //                     <div>
 //                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -323,7 +315,8 @@
 
 // export default AddMember;
 
-import { X } from 'lucide-react';
+
+import { X, User } from 'lucide-react';
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import axios from 'axios';
 
@@ -406,11 +399,6 @@ const AddMember = ({
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        if (!editingmember && !memberForm.image) {
-            alert("Please select an image.");
-            return;
-        }
 
         const formData = new FormData();
         if (memberForm.image) formData.append("image_path", memberForm.image);
@@ -522,15 +510,24 @@ const AddMember = ({
                             accept="image/png, image/jpeg, image/jpg, image/webp"
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required={!editingmember}
                         />
-                        {preview && (
-                            <img
-                                src={preview}
-                                alt="Preview"
-                                className="mt-3 h-32 w-full object-cover rounded-lg border"
-                            />
-                        )}
+
+                        {/* Preview: uploaded/existing image, or blue-circle fallback icon */}
+                        <div className="mt-3 flex justify-center">
+                            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#007dcc] p-1.5">
+                                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white">
+                                    {preview ? (
+                                        <img
+                                            src={preview}
+                                            alt="Preview"
+                                            className="h-full w-full rounded-full object-cover"
+                                        />
+                                    ) : (
+                                        <User size={40} className="text-[#007DCC]" />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div>
@@ -561,25 +558,25 @@ const AddMember = ({
                         />
                     </div>
 
-                   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">
-        Category *
-    </label>
-    <select
-        name="category"
-        value={memberForm.category}
-        onChange={handleChange}
-        required
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    >
-        <option value="">Select category</option>
-        {MEMBER_CATEGORIES.map((cat) => (
-            <option key={cat.value} value={cat.value}>
-                {cat.label}
-            </option>
-        ))}
-    </select>
-</div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Category *
+                        </label>
+                        <select
+                            name="category"
+                            value={memberForm.category}
+                            onChange={handleChange}
+                            required
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                            <option value="">Select category</option>
+                            {MEMBER_CATEGORIES.map((cat) => (
+                                <option key={cat.value} value={cat.value}>
+                                    {cat.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">

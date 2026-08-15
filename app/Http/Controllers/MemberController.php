@@ -24,10 +24,10 @@ class MemberController extends Controller
     /**
      * Store a newly created member.
      */
- public function store(Request $request)
+public function store(Request $request)
 {
     $validated = $request->validate([
-        'image_path'   => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        'image_path'   => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         'name'         => 'required|string|max:255',
         'position'     => 'required|string|max:255',
         'category'     => 'required|string|in:executive_committee,executive_members,advisors',
